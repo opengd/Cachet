@@ -117,6 +117,10 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="incident-ticket">{{ trans('forms.incidents.ticket') }}</label>
+                            <input type="text" class="form-control" name="ticket" id="incident-ticket" value="{{ Binput::old('ticket') }}" placeholder="{{ trans('forms.incidents.ticket') }}">
+                        </div>
+                        <div class="form-group">
                             <label>{{ trans('forms.incidents.occurred_at') }}</label> <small class="text-muted">{{ trans('forms.optional') }}</small>
                             <input type="text" name="occurred_at" class="form-control" rel="datepicker-custom" data-date-format="YYYY-MM-DD HH:mm" placeholder="{{ trans('forms.optional') }}">
                         </div>

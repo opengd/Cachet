@@ -36,6 +36,7 @@ return [
             ],
         ],
         'reported_by'              => 'Reported by :user',
+        'ticket'                   => 'Ticket',
         'add'                      => [
             'title'   => 'Report an incident',
             'success' => 'Incident added.',

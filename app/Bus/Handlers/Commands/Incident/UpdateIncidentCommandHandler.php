@@ -125,6 +125,7 @@ class UpdateIncidentCommandHandler
             'component_id'     => $command->component_id,
             'component_status' => $command->component_status,
             'notify'           => $command->notify,
+            'ticket'           => $command->ticket
         ];
 
         return array_filter($params, function ($val) {
@@ -154,6 +155,7 @@ class UpdateIncidentCommandHandler
                 'notify'           => $command->notify,
                 'stickied'         => $command->stickied,
                 'occurred_at'      => $command->occurred_at,
+                'ticket'           => $command->ticket,
                 'component'        => Component::find($command->component_id) ?: null,
                 'component_status' => $command->component_status,
             ],

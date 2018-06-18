@@ -98,6 +98,7 @@ class Incident extends Model implements HasPresenter
         'stickied',
         'message',
         'occurred_at',
+        'ticket',
         'created_at',
         'updated_at',
     ];
@@ -115,6 +116,7 @@ class Incident extends Model implements HasPresenter
         'visible'      => 'required|bool',
         'stickied'     => 'required|bool',
         'message'      => 'required|string',
+        'ticket'       => 'nullable|string'
     ];
 
     /**
@@ -130,6 +132,7 @@ class Incident extends Model implements HasPresenter
         'status',
         'visible',
         'stickied',
+        'ticket'
     ];
 
     /**
@@ -144,6 +147,7 @@ class Incident extends Model implements HasPresenter
         'status',
         'visible',
         'stickied',
+        'ticket',
         'message',
         'occurred_at',
     ];
