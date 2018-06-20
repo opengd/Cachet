@@ -75,6 +75,7 @@ class CreateIncidentUpdateCommandHandler
             null,
             null,
             null,
+            null,
             []
         ));
 
