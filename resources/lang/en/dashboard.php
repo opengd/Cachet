@@ -176,6 +176,17 @@ return [
             'success' => 'Subscriber has been updated!',
             'failure' => 'Something went wrong editing the subscriber, please try again.',
         ],
+        'sms'                  => [
+            'email' => 'Email',
+            'sms_number'  => 'SMS number',
+            'enabled'   => 'Enabled',
+            'add' => [
+                'title' => 'Add SMS subscription',
+                'success'   => 'SMS subscription have been added',
+                'failure'   => 'Something went wrong adding the SMS subsciptions, please try again',
+                'help'  => 'Enter the phone number for the SMS subsciption'
+            ]
+        ]
     ],
 
     // Team

@@ -14,6 +14,7 @@ namespace CachetHQ\Cachet\Http\Controllers\Dashboard;
 use AltThree\Validator\ValidationException;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\SubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UnsubscribeSubscriberCommand;
+use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberCommand;
 use CachetHQ\Cachet\Models\Subscriber;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Contracts\Config\Repository;
@@ -83,6 +84,58 @@ class SubscriberController extends Controller
     public function deleteSubscriberAction(Subscriber $subscriber)
     {
         dispatch(new UnsubscribeSubscriberCommand($subscriber));
+
+        return cachet_redirect('dashboard.subscribers');
+    }
+
+    /**
+     * Shows the add subscriber view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showAddSMSSubscriber()
+    {
+        return View::make('dashboard.subscribers.add-sms')
+            ->withPageTitle(trans('dashboard.subscribers.sms.add.title').' - '.trans('dashboard.dashboard'))
+            ->withSubscribers(Subscriber::whereNull('sms_number')->get());
+    }
+
+    /**
+     * Creates a new SMS subscriber.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createSMSSubscriberAction()
+    {
+        try {
+
+            $subscriber = Subscriber::where('email', '=', Binput::get('subscribers'))->first();
+
+            dispatch(new UpdateSubscriberCommand($subscriber, $subscriber->email, Binput::get('sms-number')));
+
+        } catch (ValidationException $e) {
+            return cachet_redirect('dashboard.subscribers.sms')
+                ->withInput(Binput::all())
+                ->withTitle(sprintf('%s %s', trans('dashboard.notifications.whoops'), trans('dashboard.subscribers.sms.add.failure')))
+                ->withErrors($e->getMessageBag());
+        }
+
+        return cachet_redirect('dashboard.subscribers')
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.sms.add.success')));
+    }
+
+    /**
+     * Deletes a SMS subscriber.
+     *
+     * @param \CachetHQ\Cachet\Models\Subscriber $subscriber
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteSMSSubscriberAction(Subscriber $subscriber)
+    {
+        dispatch(new UpdateSubscriberCommand($subscriber, $subscriber->email, null));
 
         return cachet_redirect('dashboard.subscribers');
     }

@@ -49,7 +49,10 @@
                         @else
                         <p>{{ trans('dashboard.subscribers.no_subscriptions') }}</p>
                         @endif
-                    </div>
+                    </div>{{--
+                    <div class="col-xs-2">
+                        <p><input name="agree" type="checkbox" value="1"></p>
+                    </div>--}}
                     <div class="col-xs-3 text-right">
                         <a href="{{ cachet_route('dashboard.subscribers.delete', [$subscriber->id], 'delete') }}" class="btn btn-danger confirm-action" data-method='DELETE'>{{ trans('forms.delete') }}</a>
                     </div>
@@ -59,4 +62,46 @@
         </div>
     </div>
 </div>
+ 
+@if($current_user->isAdmin && $enable_subscribers)
+<div class="content-wrapper header-fixed">
+    <a class="btn btn-md btn-success pull-right" href="{{ cachet_route('dashboard.subscribers.sms') }}">
+        {{ trans('dashboard.subscribers.sms.add.title') }}
+    </a>
+</div>
+@endif
+<div class="content-wrapper header-fixed">
+    <div class="striped-list">
+        <div class="row striped-list-item">
+            <div class="col-xs-3">
+                <p>{{ trans('dashboard.subscribers.sms.email') }}</p>
+            </div>
+            <div class="col-xs-9">
+                <p>{{ trans('dashboard.subscribers.sms.sms_number') }}</p>
+            </div>{{--
+            <div class="col-xs-6">
+                <p>{{ trans('dashboard.subscribers.sms.enabled') }}</p>
+            </div>--}}
+        </div>
+    @foreach($subscribers as $subscriber)
+        @if($subscriber->sms_number)
+        <div class="row striped-list-item">
+            <div class="col-xs-3">
+                <p>{{ $subscriber->email}}</p>
+            </div>
+            <div class="col-xs-3">
+                <p>{{ $subscriber->sms_number }}</p>
+            </div>{{--
+            <div class="col-xs-3">
+                <p><input name="agree" type="checkbox" value="1"></p>
+            </div>--}}
+            <div class="col-xs-6 text-right">
+                <a href="{{ cachet_route('dashboard.subscribers.delete_sms', [$subscriber->id], 'delete') }}" class="btn btn-danger" data-method='DELETE'>{{ trans('forms.delete') }}</a>
+            </div>
+        </div>
+        @endif
+    @endforeach
+    </div>
+</div>
+
 @stop

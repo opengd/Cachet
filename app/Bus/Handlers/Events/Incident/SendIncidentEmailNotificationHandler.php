@@ -71,6 +71,10 @@ class SendIncidentEmailNotificationHandler
 
         $globalSubscribers->each(function ($subscriber) use ($incident) {
             $subscriber->notify(new NewIncidentNotification($incident));
+
+            if($subscriber->sms_number != null) {
+                $subscriber->sendCreateIncidentSMSDirect($incident);
+            }
         });
 
         if (!$incident->component) {
@@ -88,6 +92,10 @@ class SendIncidentEmailNotificationHandler
                 return in_array($subscriber->id, $notified);
             })->each(function ($subscriber) use ($incident) {
                 $subscriber->notify(new NewIncidentNotification($incident));
+
+                if($subscriber->sms_number != null) {
+                    $subscriber->sendCreateIncidentSMSDirect($incident);
+                }
             });
     }
 }

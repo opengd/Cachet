@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This is the subscriber model.
@@ -41,6 +42,7 @@ class Subscriber extends Model implements HasPresenter
         'verify_code'       => 'string',
         'verified_at'       => 'date',
         'global'            => 'bool',
+        'sms_number'      => 'string',
     ];
 
     /**
@@ -54,6 +56,7 @@ class Subscriber extends Model implements HasPresenter
         'slack_webhook_url',
         'verified_at',
         'global',
+        'sms_number',
     ];
 
     /**
@@ -65,6 +68,7 @@ class Subscriber extends Model implements HasPresenter
         'email'             => 'nullable|email',
         'phone_number'      => 'nullable|string',
         'slack_webhook_url' => 'nullable|url',
+        'sms_number'        => 'nullable|string'
     ];
 
     /**
@@ -197,5 +201,52 @@ class Subscriber extends Model implements HasPresenter
     public function getPresenterClass()
     {
         return SubscriberPresenter::class;
+    }
+
+    /**
+     * Send SMS direct for Create Incident.
+     *
+     * @return string
+     */
+    public function sendCreateIncidentSMSDirect(Incident $incident)
+    {
+        /*
+        $request = \Illuminate\Http\Request::create(config('sms.url'), 
+            'GET', [
+                    'username' => config('sms.username'), 
+                    'password' => config('sms.password'), 
+                    'from' => config('sms.from'), 
+                    'to'=> $this->sms_number, 
+                    'text' => $incident->toNexmo()
+                ]);
+        */
+
+        Log::error("sendCreateIncidentSMSDirect: " . $incident->name);
+        return; // $request;
+    }
+
+    /**
+     * Send SMS direct for new Incident Update.
+     *
+     * @return string
+     */
+    public function sendIncidentUpdateSMSDirect(IncidentUpdate $update)
+    {
+
+        $incident = Incident::find($update->incident_id);
+
+        /*
+        $request = \Illuminate\Http\Request::create(config('sms.url'), 
+            'GET', [
+                    'username' => config('sms.username'), 
+                    'password' => config('sms.password'), 
+                    'from' => config('sms.from'), 
+                    'to'=> $this->sms_number, 
+                    'text' => $incident->toNexmo()
+                ]);
+        */
+
+        Log::error("sendIncidentUpdateSMSDirect: " . $incident->name);
+        return; /// $request;
     }
 }

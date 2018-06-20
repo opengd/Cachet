@@ -224,6 +224,7 @@ return [
             'description' => 'Invite your team members by entering their email addresses here.',
             'email'       => 'Your Team Members Email Address',
         ],
+        'sms_number'    => 'SMS number'
     ],
 
     'general' => [
