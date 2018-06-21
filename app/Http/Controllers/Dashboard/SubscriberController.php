@@ -111,7 +111,13 @@ class SubscriberController extends Controller
 
             $subscriber = Subscriber::where('email', '=', Binput::get('subscribers'))->first();
 
-            dispatch(new UpdateSubscriberCommand($subscriber, $subscriber->email, Binput::get('sms-number')));
+            dispatch(new UpdateSubscriberCommand($subscriber, 
+                $subscriber->email, 
+                Binput::get('sms-number'), 
+                $subscriber->verified, 
+                $subscriber->email_notify, 
+                Binput::get('sms-notify', false)
+            ));
 
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.subscribers.sms')
@@ -135,7 +141,13 @@ class SubscriberController extends Controller
      */
     public function deleteSMSSubscriberAction(Subscriber $subscriber)
     {
-        dispatch(new UpdateSubscriberCommand($subscriber, $subscriber->email, null));
+        dispatch(new UpdateSubscriberCommand($subscriber, 
+            $subscriber->email, 
+            null, 
+            $subscriber->verified, 
+            $subscriber->email_notify, 
+            $subscriber->sms_notify
+        ));
 
         return cachet_redirect('dashboard.subscribers');
     }

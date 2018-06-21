@@ -33,6 +33,12 @@
                 <input type="text" class="form-control" name="sms-number" id="sms-number" required placeholder="{{ trans('forms.user.sms_number') }}">
             </div>
 
+            <input type="hidden" name="sms-notify" value="0">
+            <div class="form-group">
+                <label for="sms-notify">{{ trans('forms.user.sms_number') }}</label>
+                <p><input name="sms-notify" type="checkbox" value="1" checked="{{ Binput::old('sms_notify', 'checked') }}"></p>
+            </div>
+
             </fieldset>
 
             <div class="form-group">

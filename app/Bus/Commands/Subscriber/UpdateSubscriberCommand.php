@@ -50,6 +50,20 @@ final class UpdateSubscriberCommand
     public $verified;
 
     /**
+     * The email notify enable flag.
+     *
+     * @var bool
+     */
+    public $email_notify;
+
+    /**
+     * The sms notify enable flag.
+     *
+     * @var bool
+     */
+    public $sms_notify;
+
+    /**
      * The list of subscriptions to set the subscriber up with.
      *
      * @var array|null
@@ -72,16 +86,20 @@ final class UpdateSubscriberCommand
      * @param Subscriber $subscriber
      * @param string     $email
      * @param bool       $verified
+     * @param bool       $email_notify
+     * @param bool       $sms_notify
      * @param array|null $subscriptions
      *
      * @return void
      */
-    public function __construct(Subscriber $subscriber, $email, $sms_number, $verified = false, $subscriptions = null)
+    public function __construct(Subscriber $subscriber, $email, $sms_number, $verified = false, $email_notify = true, $sms_notify = true, $subscriptions = null)
     {
         $this->subscriber = $subscriber;
         $this->email = $email;
         $this->sms_number = $sms_number;
         $this->verified = $verified;
+        $this->email_notify = $email_notify;
+        $this->sms_notify = $sms_notify;
         $this->subscriptions = $subscriptions;
     }
 }

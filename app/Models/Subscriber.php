@@ -43,6 +43,8 @@ class Subscriber extends Model implements HasPresenter
         'verified_at'       => 'date',
         'global'            => 'bool',
         'sms_number'      => 'string',
+        'email_notify'      => 'bool',
+        'sms_notify'        => 'bool'
     ];
 
     /**
@@ -57,6 +59,8 @@ class Subscriber extends Model implements HasPresenter
         'verified_at',
         'global',
         'sms_number',
+        'email_notify',
+        'sms_notify'
     ];
 
     /**
@@ -68,7 +72,9 @@ class Subscriber extends Model implements HasPresenter
         'email'             => 'nullable|email',
         'phone_number'      => 'nullable|string',
         'slack_webhook_url' => 'nullable|url',
-        'sms_number'        => 'nullable|string'
+        'sms_number'        => 'nullable|string',
+        'email_notify'      =>  'required|bool',
+        'sms_notify'        => 'required|bool'
     ];
 
     /**
@@ -221,7 +227,7 @@ class Subscriber extends Model implements HasPresenter
                 ]);
         */
 
-        Log::error("sendCreateIncidentSMSDirect: " . $incident->name);
+        Log::error($this->email . ":sendCreateIncidentSMSDirect: " . $incident->name);
         return; // $request;
     }
 
@@ -246,7 +252,7 @@ class Subscriber extends Model implements HasPresenter
                 ]);
         */
 
-        Log::error("sendIncidentUpdateSMSDirect: " . $incident->name);
+        Log::error($this->email . ":sendIncidentUpdateSMSDirect: " . $incident->name);
         return; /// $request;
     }
 }

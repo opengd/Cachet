@@ -177,6 +177,7 @@ return [
             'failure' => 'Something went wrong editing the subscriber, please try again.',
         ],
         'sms'                  => [
+            'description' => 'Add a phone number to subscribers to send a SMS on incidents.',
             'email' => 'Email',
             'sms_number'  => 'SMS number',
             'enabled'   => 'Enabled',

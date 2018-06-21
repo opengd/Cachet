@@ -71,17 +71,24 @@
 </div>
 @endif
 <div class="content-wrapper header-fixed">
+    <p class="lead">
+        @if($enable_subscribers)
+        {{ trans('dashboard.subscribers.sms.description') }}
+        @else
+        {{ trans('dashboard.subscribers.description_disabled') }}
+        @endif
+    </p>
     <div class="striped-list">
         <div class="row striped-list-item">
             <div class="col-xs-3">
                 <p>{{ trans('dashboard.subscribers.sms.email') }}</p>
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-3">
                 <p>{{ trans('dashboard.subscribers.sms.sms_number') }}</p>
-            </div>{{--
+            </div>
             <div class="col-xs-6">
                 <p>{{ trans('dashboard.subscribers.sms.enabled') }}</p>
-            </div>--}}
+            </div>
         </div>
     @foreach($subscribers as $subscriber)
         @if($subscriber->sms_number)
@@ -91,11 +98,15 @@
             </div>
             <div class="col-xs-3">
                 <p>{{ $subscriber->sms_number }}</p>
-            </div>{{--
+            </div>
             <div class="col-xs-3">
-                <p><input name="agree" type="checkbox" value="1"></p>
-            </div>--}}
-            <div class="col-xs-6 text-right">
+            @if($subscriber->sms_notify)
+            <p>True</p>
+            @else
+            <p>False</p>
+            @endif
+            </div>
+            <div class="col-xs-3 text-right">
                 <a href="{{ cachet_route('dashboard.subscribers.delete_sms', [$subscriber->id], 'delete') }}" class="btn btn-danger" data-method='DELETE'>{{ trans('forms.delete') }}</a>
             </div>
         </div>
