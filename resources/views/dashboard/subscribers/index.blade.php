@@ -101,9 +101,7 @@
             </div>
             <div class="col-xs-3">
             @if($subscriber->sms_notify)
-            <p>True</p>
-            @else
-            <p>False</p>
+            <p><i class="ion ion ion-checkmark"></i></p>
             @endif
             </div>
             <div class="col-xs-3 text-right">
