@@ -181,6 +181,8 @@ return [
             'email' => 'Email',
             'sms_number'  => 'SMS number',
             'enabled'   => 'Enabled',
+            'email_enabled'   => 'Email Enabled',
+            'sms_enabled'   => 'SMS Enabled',
             'add' => [
                 'title' => 'Add SMS subscription',
                 'success'   => 'SMS subscription have been added',

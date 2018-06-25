@@ -13,29 +13,29 @@
     <div class="row">
         <div class="col-sm-12">
         @include('partials.errors')
-        <form name="SubscriberForm" class="form-vertical" role="form" action="{{ cachet_route('dashboard.subscribers.sms', [], 'post') }}" method="POST">
+        <form name="SubscriberForm" class="form-vertical" role="form" action="{{ cachet_route('dashboard.subscribers.edit', [], 'post') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
-            @if($subscribers->count() > 0)
-                <div class="form-group">
-                    <label for="subscribers">{{ trans('dashboard.subscribers.subscribers') }}</label>
-                    <select class="form-control" name="subscribers">
-                        <option selected></option>
-                        @foreach($subscribers as $subscriber)
-                        <option value="{{ $subscriber->email }}">{{ $subscriber->email }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            @endif
 
             <div class="form-group">
-                <label for="sms-number">{{ trans('forms.user.sms_number') }}</label>
-                <input type="text" class="form-control" name="sms-number" id="sms-number" required placeholder="{{ trans('forms.user.sms_number') }}">
+                <label for="sms-number">{{ trans('forms.user.email') }}</label>
+                <input type="text" class="form-control" name="sms-number" id="sms-number" required value="{{$subscriber->email}}" placeholder="{{ trans('forms.user.email') }}">
             </div>
 
             <input type="hidden" name="sms-notify" value="0">
             <div class="form-group">
-                <label for="sms-notify">{{ trans('forms.user.sms_number') }}</label>
+                <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
+                <p><input name="email-notify" type="checkbox" value="1" checked="{{ Binput::old('email_notify', 'checked') }}"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="sms-number">{{ trans('forms.user.sms_number') }}</label>
+                <input type="text" class="form-control" name="sms-number" id="sms-number" value="{{$subscriber->sms_number}}" placeholder="{{ trans('forms.user.sms_number') }}">
+            </div>
+
+            <input type="hidden" name="sms-notify" value="0">
+            <div class="form-group">
+                <label for="sms-notify">{{ trans('dashboard.subscribers.sms_enabled') }}</label>
                 <p><input name="sms-notify" type="checkbox" value="1" checked="{{ Binput::old('sms_notify', 'checked') }}"></p>
             </div>
 
@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <div class="btn-group">
-                    <button type="submit" class="btn btn-success">{{ trans('forms.add') }}</button>
+                    <button type="submit" class="btn btn-success">{{ trans('forms.save') }}</button>
                     <a class="btn btn-default" href="{{ cachet_route('dashboard.subscribers') }}">{{ trans('forms.cancel') }}</a>
                 </div>
             </div>
