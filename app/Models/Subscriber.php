@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Subscriber extends Model implements HasPresenter
 {
-    use Notifiable, ValidatingTrait, HasTags, SearchableTrait, SortableTrait;
+    use Notifiable, ValidatingTrait;
 
     /**
      * The attributes that should be casted to native types.
