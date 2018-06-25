@@ -28,7 +28,7 @@ You can now [join our Slack community!](http://cachethq-slack.herokuapp.com)
 
 ## Requirements
 
-- PHP 5.6.4+ or newer
+- PHP 5.6.4+ or newer (PHP 7.2 is not currently supported)
 - HTTP server with PHP support (eg: Apache, Nginx, Caddy)
 - [Composer](https://getcomposer.org)
 - A supported database: MySQL, PostgreSQL or SQLite
@@ -72,3 +72,9 @@ We offer a professional installation service. To find out more, email us at [sup
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Cachet, please send an e-mail to us at support@alt-three.com. We handle all security vulnerabilities on a case-by-case basis.
+
+## Sponsorship
+
+Thank you to the following for [sponsoring](https://patreon.com/jbrooksuk) Cachet.
+
+![Exascale](/docs/images/sponsorships/exascale.jpg)
