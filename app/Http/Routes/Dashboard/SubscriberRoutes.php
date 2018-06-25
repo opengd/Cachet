@@ -74,6 +74,15 @@ class SubscriberRoutes
                 'as'   => 'delete:dashboard.subscribers.delete_sms',
                 'uses' => 'SubscriberController@deleteSMSSubscriberAction',
             ]);
+
+            $router->get('{subscriber}/edit', [
+                'as'   => 'get:dashboard.subscribers.edit',
+                'uses' => 'SubscriberController@showEditSubscriber',
+            ]);
+            $router->post('{subscriber}/edit', [
+                'as'   => 'post:dashboard.subscribers.edit',
+                'uses' => 'SubscriberController@editSubscriberAction',
+            ]);
         });
     }
 }

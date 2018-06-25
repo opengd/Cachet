@@ -105,6 +105,7 @@
             @endif
             </div>
             <div class="col-xs-3 text-right">
+                <a href="{{ cachet_route('dashboard.subscribers.edit', [$subscriber->id]) }}" class="btn btn-default">{{ trans('forms.edit') }}</a>
                 <a href="{{ cachet_route('dashboard.subscribers.delete_sms', [$subscriber->id], 'delete') }}" class="btn btn-danger" data-method='DELETE'>{{ trans('forms.delete') }}</a>
             </div>
         </div>

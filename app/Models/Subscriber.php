@@ -18,6 +18,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use Illuminate\Support\Facades\Log;
+use CachetHQ\Cachet\Models\Traits\HasTags;
+use CachetHQ\Cachet\Models\Traits\SearchableTrait;
+use CachetHQ\Cachet\Models\Traits\SortableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * This is the subscriber model.
@@ -28,7 +32,7 @@ use Illuminate\Support\Facades\Log;
  */
 class Subscriber extends Model implements HasPresenter
 {
-    use Notifiable, ValidatingTrait;
+    use Notifiable, ValidatingTrait, HasTags, SearchableTrait, SortableTrait;
 
     /**
      * The attributes that should be casted to native types.

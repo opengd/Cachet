@@ -11,6 +11,7 @@
 
 namespace CachetHQ\Cachet\Bus\Handlers\Commands\Subscriber;
 
+use AltThree\Validator\ValidationException;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\SubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\VerifySubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberCommand;
@@ -19,6 +20,7 @@ use CachetHQ\Cachet\Models\Component;
 use CachetHQ\Cachet\Models\Subscriber;
 use CachetHQ\Cachet\Models\Subscription;
 use CachetHQ\Cachet\Notifications\Subscriber\VerifySubscriptionNotification;
+use Illuminate\Support\MessageBag;
 
 /**
  * This is the subscribe subscriber command handler.
@@ -40,6 +42,17 @@ class UpdateSubscriberCommandHandler
     public function handle(UpdateSubscriberCommand $command)
     {
         $subscriber = $command->subscriber;
+
+        $dup = Subscriber::where('email', $command->email)->where('id', '<>', $subscriber->id)->get();
+
+        if($dup->count() > 0) {
+            throw new ValidationException(new MessageBag(['Duplicate emails']));    
+        } else if($subscriber->getIsVerifiedAttribute() && !$command->verified) {
+            $subscriber->verified_at = null;
+        } else if(!$subscriber->getIsVerifiedAttribute() && $command->verified) {
+            $subscriber->verified_at = time();
+        }
+
         $subscriber->fill($this->filter($command));
 
         $subscriber->save();
@@ -57,11 +70,10 @@ class UpdateSubscriberCommandHandler
     protected function filter(UpdateSubscriberCommand $command)
     {
         $params = [
-            //'email'            => $command->email,
-            'sms_number'     => $command->sms_number,
-            'sms_notify'         => $command->sms_notify,
-            'email_notify'         => $command->email_notify,
-            //'verified'         => $command->verified,
+            'email'         => $command->email,
+            'sms_number'    => $command->sms_number,
+            'sms_notify'    => $command->sms_notify,
+            'email_notify'  => $command->email_notify
             //'subscriptions'    => $command->subscriptions,
         ];
 
