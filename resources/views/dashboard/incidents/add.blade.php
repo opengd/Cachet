@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                             <label class="radio-inline">
-                                <input type="radio" name="status" value="1" v-model="status">
+                                <input type="radio" name="status" value="1" checked>
                                 <i class="ion ion-flag"></i>
                                 {{ trans('cachet.incidents.status')[1] }}
                             </label>
