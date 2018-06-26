@@ -17,11 +17,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use Illuminate\Support\Facades\Log;
-use CachetHQ\Cachet\Models\Traits\HasTags;
-use CachetHQ\Cachet\Models\Traits\SearchableTrait;
-use CachetHQ\Cachet\Models\Traits\SortableTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * This is the subscriber model.
@@ -204,6 +199,16 @@ class Subscriber extends Model implements HasPresenter
     }
 
     /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSMS()
+    {
+        return $this->sms_number;
+    }
+
+    /**
      * Get the presenter class.
      *
      * @return string
@@ -211,52 +216,5 @@ class Subscriber extends Model implements HasPresenter
     public function getPresenterClass()
     {
         return SubscriberPresenter::class;
-    }
-
-    /**
-     * Send SMS direct for Create Incident.
-     *
-     * @return string
-     */
-    public function sendCreateIncidentSMSDirect(Incident $incident)
-    {
-        /*
-        $request = \Illuminate\Http\Request::create(config('sms.url'), 
-            'GET', [
-                    'username' => config('sms.username'), 
-                    'password' => config('sms.password'), 
-                    'from' => config('sms.from'), 
-                    'to'=> $this->sms_number, 
-                    'text' => $incident->toNexmo()
-                ]);
-        */
-
-        Log::error($this->email . ":sendCreateIncidentSMSDirect: " . $incident->name);
-        return; // $request;
-    }
-
-    /**
-     * Send SMS direct for new Incident Update.
-     *
-     * @return string
-     */
-    public function sendIncidentUpdateSMSDirect(IncidentUpdate $update)
-    {
-
-        $incident = Incident::find($update->incident_id);
-
-        /*
-        $request = \Illuminate\Http\Request::create(config('sms.url'), 
-            'GET', [
-                    'username' => config('sms.username'), 
-                    'password' => config('sms.password'), 
-                    'from' => config('sms.from'), 
-                    'to'=> $this->sms_number, 
-                    'text' => $incident->toNexmo()
-                ]);
-        */
-
-        Log::error($this->email . ":sendIncidentUpdateSMSDirect: " . $incident->name);
-        return; /// $request;
     }
 }

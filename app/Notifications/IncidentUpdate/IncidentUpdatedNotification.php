@@ -19,6 +19,9 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
+use CachetHQ\Cachet\Channels\SMSChannel;
+use CachetHQ\Cachet\Channels\Messages\SMSMessage;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This is the incident updated notification class.
@@ -57,7 +60,7 @@ class IncidentUpdatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'nexmo', 'slack'];
+        return ['mail', 'nexmo', 'slack', SMSChannel::class];
     }
 
     /**
@@ -142,5 +145,22 @@ class IncidentUpdatedNotification extends Notification
                                     ]))
                                    ->footer(trans('cachet.subscriber.unsubscribe', ['link' => cachet_route('subscribe.unsubscribe', $notifiable->verify_code)]));
                     });
+    }
+
+    /**
+     * Get the SMS representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return \CachetHQ\Cachet\Channels\Messages\SMSMessage
+     */
+    public function toSMS($notifiable)
+    {
+        $content = trans('notifications.incident.update.sms.content', [
+            'name' => $this->update->incident->name,
+            'ticket' => $this->update->incident->ticket != null && $this->update->incident->ticket != "" ? $this->update->incident->ticket : ""
+        ]);
+
+        return (new SMSMessage())->content($content);
     }
 }

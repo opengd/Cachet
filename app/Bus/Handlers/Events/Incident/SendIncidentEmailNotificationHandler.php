@@ -70,13 +70,7 @@ class SendIncidentEmailNotificationHandler
         $globalSubscribers = $this->subscriber->isVerified()->isGlobal()->get();
 
         $globalSubscribers->each(function ($subscriber) use ($incident) {
-            if($subscriber->email_notify) {
-                $subscriber->notify(new NewIncidentNotification($incident));
-            }
-
-            if($subscriber->sms_notify && $subscriber->sms_number != null) {
-                $subscriber->sendCreateIncidentSMSDirect($incident);
-            }
+            $subscriber->notify(new NewIncidentNotification($incident));
         });
 
         if (!$incident->component) {
@@ -93,13 +87,7 @@ class SendIncidentEmailNotificationHandler
             ->reject(function ($subscriber) use ($notified) {
                 return in_array($subscriber->id, $notified);
             })->each(function ($subscriber) use ($incident) {
-                if($subscriber->email_notify) {
-                    $subscriber->notify(new NewIncidentNotification($incident));
-                }
-
-                if($subscriber->sms_notify && $subscriber->sms_number != null) {
-                    $subscriber->sendCreateIncidentSMSDirect($incident);
-                }
+                $subscriber->notify(new NewIncidentNotification($incident));
             });
     }
 }
