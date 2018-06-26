@@ -18,6 +18,8 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
+use CachetHQ\Cachet\Channels\SMSChannel;
+use CachetHQ\Cachet\Channels\Messages\SMSMessage;
 
 /**
  * This is the new schedule notification class.
@@ -56,7 +58,7 @@ class NewScheduleNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'nexmo', 'slack'];
+        return ['mail', 'nexmo', 'slack', SMSChannel::class];
     }
 
     /**
@@ -123,5 +125,22 @@ class NewScheduleNotification extends Notification
                                     ]))
                                    ->footer(trans('cachet.subscriber.unsubscribe', ['link' => cachet_route('subscribe.unsubscribe', $notifiable->verify_code)]));
                     });
+    }
+
+    /**
+     * Get the SMS representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return \CachetHQ\Cachet\Channels\Messages\SMSMessage
+     */
+    public function toSMS($notifiable)
+    {
+        $content = trans('notifications.schedule.new.sms.content', [
+            'name' => $this->schedule->name,
+            'date' => $this->schedule->scheduled_at_formatted,
+        ]);
+
+        return (new SMSMessage())->content($content);
     }
 }
