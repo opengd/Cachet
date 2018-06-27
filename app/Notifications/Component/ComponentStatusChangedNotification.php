@@ -84,12 +84,17 @@ class ComponentStatusChangedNotification extends Notification
         ]);
 
         return (new MailMessage())
-                    ->subject(trans('notifications.component.status_update.mail.subject'))
-                    ->greeting(trans('notifications.component.status_update.mail.subject'))
-                    ->line($content)
-                    ->action(trans('notifications.component.status_update.mail.action'), cachet_route('status-page'))
-                    ->line(trans('cachet.subscriber.unsubscribe', ['link' => cachet_route('subscribe.unsubscribe', $notifiable->verify_code)]))
-                    ->line(trans('cachet.subscriber.manage.manage_at_link', ['link' =>  cachet_route('subscribe.manage', $notifiable->verify_code)]));
+        ->subject(trans('notifications.component.status_update.mail.subject'))
+        ->markdown('notifications.component.update', [
+            'greeting'               => trans('notifications.component.status_update.mail.greeting'),
+            'content'                => $content,
+            'actionText'             => trans('notifications.component.status_update.mail.action'),
+            'actionUrl'              => cachet_route('status-page'),
+            'unsubscribeText'        => trans('cachet.subscriber.unsubscribe'),
+            'unsubscribeUrl'         => cachet_route('subscribe.unsubscribe', $notifiable->verify_code),
+            'manageSubscriptionText' => trans('cachet.subscriber.manage_subscription'),
+            'manageSubscriptionUrl'  => cachet_route('subscribe.manage', $notifiable->verify_code),
+        ]);
     }
 
     /**
