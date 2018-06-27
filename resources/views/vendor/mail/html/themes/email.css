@@ -115,6 +115,16 @@ img {
     text-shadow: 0 1px 0 white;
 }
 
+/* Header Logo */
+
+.header img {
+    height: 75px; 
+}
+
+.header p {
+    text-align: center;
+}
+
 /* Body */
 
 .body {
