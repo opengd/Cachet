@@ -6,7 +6,7 @@ body, body *:not(html):not(style):not(br):not(tr):not(code) {
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #f5f8fa;
     color: #74787E;
     height: 100%;
     hyphens: auto;
@@ -82,7 +82,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #ffffff;
+    background-color: #f5f8fa;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -185,7 +185,7 @@ img {
 }
 
 .table td {
-    color: #ffffff;
+    color: #74787E;
     font-size: 15px;
     line-height: 18px;
     padding: 10px 0;
