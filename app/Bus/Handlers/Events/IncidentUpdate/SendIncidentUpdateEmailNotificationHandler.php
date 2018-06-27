@@ -59,7 +59,7 @@ class SendIncidentUpdateEmailNotificationHandler
         $incident = $update->incident;
 
         // Only send emails for public incidents while the system is not under scheduled maintenance.
-        if (!$incident->visible || !$this->system->canNotifySubscribers()) {
+        if (!$event->notify || !$incident->visible || !$this->system->canNotifySubscribers()) {
             return;
         }
 

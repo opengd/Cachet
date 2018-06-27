@@ -37,6 +37,13 @@ final class IncidentUpdateWasReportedEvent implements ActionInterface, IncidentU
     public $update;
 
     /**
+     * Whether to notify that the incident was reported.
+     *
+     * @var bool
+     */
+    public $notify;
+
+    /**
      * Create a new incident update was reported event instance.
      *
      * @param \CachetHQ\Cachet\Models\User           $user
@@ -44,10 +51,11 @@ final class IncidentUpdateWasReportedEvent implements ActionInterface, IncidentU
      *
      * @return void
      */
-    public function __construct(User $user, IncidentUpdate $update)
+    public function __construct(User $user, IncidentUpdate $update, $notify)
     {
         $this->user = $user;
         $this->update = $update;
+        $this->notify = $notify;
     }
 
     /**
