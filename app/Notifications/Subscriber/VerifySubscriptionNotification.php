@@ -54,13 +54,5 @@ class VerifySubscriptionNotification extends Notification
             'actionText'             => trans('notifications.subscriber.verify.mail.action'),
             'actionUrl'              => cachet_route('subscribe.verify', ['code' => $notifiable->verify_code]),
         ]);
-
-        /*
-        return (new MailMessage())
-                    ->subject(trans('notifications.subscriber.verify.mail.subject'))
-                    ->greeting(trans('notifications.subscriber.verify.mail.title', ['app_name' => Config::get('setting.app_name')]))
-                    ->action(trans('notifications.subscriber.verify.mail.action'), cachet_route('subscribe.verify', ['code' => $notifiable->verify_code]))
-                    ->line(trans('notifications.subscriber.verify.mail.content', ['app_name' => Config::get('setting.app_name')]));
-        */
     }
 }
