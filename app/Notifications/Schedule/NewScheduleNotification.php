@@ -74,11 +74,17 @@ class NewScheduleNotification extends Notification
         ]);
 
         return (new MailMessage())
-                    ->subject(trans('notifications.schedule.new.mail.subject'))
-                    ->greeting(trans('notifications.schedule.new.mail.title'))
-                    ->line($content)
-                    ->action(trans('notifications.schedule.new.mail.action'), cachet_route('schedule', [$this->schedule]))
-                    ->line(trans('cachet.subscriber.unsubscribe', ['link' => cachet_route('subscribe.unsubscribe', $notifiable->verify_code)]));
+        ->subject(trans('notifications.schedule.new.mail.subject'))
+        ->markdown('notifications.component.update', [
+            'greeting'               => trans('notifications.schedule.new.mail.title'),
+            'content'                => $content,
+            'actionText'             => trans('notifications.schedule.new.mail.action'),
+            'actionUrl'              => cachet_route('schedule', [$this->schedule]),
+            'unsubscribeText'        => trans('cachet.subscriber.unsubscribe'),
+            'unsubscribeUrl'         => cachet_route('subscribe.unsubscribe', $notifiable->verify_code),
+            'manageSubscriptionText' => trans('cachet.subscriber.manage_subscription'),
+            'manageSubscriptionUrl'  => cachet_route('subscribe.manage', $notifiable->verify_code),
+        ]);
     }
 
     /**
