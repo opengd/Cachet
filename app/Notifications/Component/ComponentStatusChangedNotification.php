@@ -18,6 +18,8 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
+use CachetHQ\Cachet\Channels\SMSChannel;
+use CachetHQ\Cachet\Channels\Messages\SMSMessage;
 
 /**
  * This is the component status changed notification class.
@@ -65,7 +67,7 @@ class ComponentStatusChangedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'nexmo', 'slack'];
+        return ['mail', 'nexmo', 'slack', SMSChannel::class];
     }
 
     /**
@@ -153,5 +155,23 @@ class ComponentStatusChangedNotification extends Notification
                                     ]))
                                    ->footer(trans('cachet.subscriber.unsubscribe', ['link' => cachet_route('subscribe.unsubscribe', $notifiable->verify_code)]));
                     });
+    }
+
+    /**
+     * Get the SMS representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return \CachetHQ\Cachet\Channels\Messages\SMSMessage
+     */
+    public function toSMS($notifiable)
+    {
+        $content = trans('notifications.component.status_update.sms.content', [
+            'name'       => $this->component->name,
+            'old_status' => $this->component->human_status,
+            'new_status' => trans("cachet.components.status.{$this->status}"),
+        ]);
+
+        return (new SMSMessage())->content($content);
     }
 }

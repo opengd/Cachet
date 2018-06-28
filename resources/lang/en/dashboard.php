@@ -165,6 +165,8 @@ return [
         'subscriber'           => ':email, subscribed :date',
         'no_subscriptions'     => 'Subscribed to all updates',
         'global'               => 'Globally subscribed',
+        'email_enabled'        => 'Email enabled',
+        'sms_enabled'          => 'SMS enabled',
         'add'                  => [
             'title'   => 'Add a new subscriber',
             'success' => 'Subscriber has been added!',
@@ -175,7 +177,26 @@ return [
             'title'   => 'Update subscriber',
             'success' => 'Subscriber has been updated!',
             'failure' => 'Something went wrong editing the subscriber, please try again.',
+            'error' => [
+                'duplicate' => 'Duplicate emails, subscriber already exist.'
+            ]
         ],
+        'sms'                  => [
+            'sms'           => 'SMS',
+            'description' => 'Add a phone number to subscribers to send a SMS on incidents.',
+            'email' => 'Email',
+            'sms_number'  => 'SMS number',
+            'enabled'   => 'Enabled',
+            'add' => [
+                'title' => 'Add SMS subscription',
+                'success'   => 'SMS subscription have been added',
+                'failure'   => 'Something went wrong adding the SMS subsciptions, please try again.',
+                'help'  => 'Enter the phone number for the SMS subsciption',
+                'error' => [
+                    'not_found' => 'Unable to find matching subscriber.'
+                ]
+            ]
+        ]
     ],
 
     // Team

@@ -41,6 +41,9 @@ class Subscriber extends Model implements HasPresenter
         'verify_code'       => 'string',
         'verified_at'       => 'date',
         'global'            => 'bool',
+        'sms_number'      => 'string',
+        'email_notify'      => 'bool',
+        'sms_notify'        => 'bool'
     ];
 
     /**
@@ -54,6 +57,9 @@ class Subscriber extends Model implements HasPresenter
         'slack_webhook_url',
         'verified_at',
         'global',
+        'sms_number',
+        'email_notify',
+        'sms_notify'
     ];
 
     /**
@@ -65,6 +71,9 @@ class Subscriber extends Model implements HasPresenter
         'email'             => 'nullable|email',
         'phone_number'      => 'nullable|string',
         'slack_webhook_url' => 'nullable|url',
+        'sms_number'        => 'nullable|string',
+        'email_notify'      =>  'required|bool',
+        'sms_notify'        => 'required|bool'
     ];
 
     /**
@@ -187,6 +196,16 @@ class Subscriber extends Model implements HasPresenter
     public function routeNotificationForSlack()
     {
         return $this->slack_webhook_url;
+    }
+
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSMS()
+    {
+        return $this->sms_number;
     }
 
     /**

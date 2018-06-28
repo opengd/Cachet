@@ -129,7 +129,7 @@ class Incident extends Model implements HasPresenter
         'stickied'      => 'required|bool',
         'notifications' => 'nullable|bool',
         'message'       => 'required|string',
-        'ticket'       => 'nullable|string',
+        'ticket'        => 'nullable|string',
     ];
 
     /**
