@@ -89,7 +89,7 @@
                             <textarea name="message" class="form-control autosize" rows="5" required>{{ Binput::old('message') }}</textarea>
                         </div>
                     </div>
-                    @if($notifications_enabled)
+                    @if($notificationsEnabled)
                         <input type="hidden" name="notify" value="0">
                         <div class="checkbox">
                             <label>
