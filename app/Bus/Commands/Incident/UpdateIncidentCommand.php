@@ -93,6 +93,13 @@ final class UpdateIncidentCommand
     public $occurred_at;
 
     /**
+     * The incident ticket.
+     *
+     * @var string
+     */
+    public $ticket;
+
+    /**
      * A given incident template.
      *
      * @var string|null
@@ -121,6 +128,7 @@ final class UpdateIncidentCommand
         'notify'           => 'nullable|bool',
         'stickied'         => 'nullable|bool',
         'occurred_at'      => 'nullable|string',
+        'ticket'           => 'nullable|string',
         'template'         => 'nullable|string',
     ];
 
@@ -137,12 +145,13 @@ final class UpdateIncidentCommand
      * @param bool                             $notify
      * @param bool                             $stickied
      * @param string|null                      $occurred_at
+     * @param string                           $ticket
      * @param string|null                      $template
      * @param array                            $template_vars
      *
      * @return void
      */
-    public function __construct(Incident $incident, $name, $status, $message, $visible, $component_id, $component_status, $notify, $stickied, $occurred_at, $template, array $template_vars = [])
+    public function __construct(Incident $incident, $name, $status, $message, $visible, $component_id, $component_status, $notify, $stickied, $occurred_at, $ticket, $template, array $template_vars = [])
     {
         $this->incident = $incident;
         $this->name = $name;
@@ -154,6 +163,7 @@ final class UpdateIncidentCommand
         $this->notify = $notify;
         $this->stickied = $stickied;
         $this->occurred_at = $occurred_at;
+        $this->ticket = $ticket;
         $this->template = $template;
         $this->template_vars = $template_vars;
     }

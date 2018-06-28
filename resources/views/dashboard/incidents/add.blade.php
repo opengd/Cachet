@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                             <label class="radio-inline">
-                                <input type="radio" name="status" value="1" v-model="status">
+                                <input type="radio" name="status" value="1" checked>
                                 <i class="ion ion-flag"></i>
                                 {{ trans('cachet.incidents.status')[1] }}
                             </label>
@@ -115,6 +115,10 @@
                             <div class="markdown-control">
                                 <textarea name="message" class="form-control autosize" rows="5" required v-model="message">{{ Binput::old('message') }}</textarea>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-ticket">{{ trans('forms.incidents.ticket') }}</label>
+                            <input type="text" class="form-control" name="ticket" id="incident-ticket" value="{{ Binput::old('ticket') }}" placeholder="{{ trans('forms.incidents.ticket') }}">
                         </div>
                         <div class="form-group">
                             <label>{{ trans('forms.incidents.occurred_at') }}</label> <small class="text-muted">{{ trans('forms.optional') }}</small>

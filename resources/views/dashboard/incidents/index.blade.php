@@ -26,6 +26,11 @@
                             @if($incident->message)
                             <p>{{ Str::words($incident->message, 5) }}</p>
                             @endif
+                            @if($incident->ticket && filter_var($incident->ticket, FILTER_VALIDATE_URL))
+                            <p><span><a href="{{ $incident->ticket }}" target="_blank">{{ basename(parse_url($incident->ticket, PHP_URL_PATH)) }}</a></span></p>
+                            @elseif($incident->ticket)
+                            <p><span>{{ Str::words($incident->ticket)}}</span></p>
+                            @endif
                             @if ($incident->user)
                             <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }}</small></p>
                             @endif

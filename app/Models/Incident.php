@@ -110,6 +110,7 @@ class Incident extends Model implements HasPresenter
         'notifications',
         'message',
         'occurred_at',
+        'ticket',
         'created_at',
         'updated_at',
     ];
@@ -120,7 +121,7 @@ class Incident extends Model implements HasPresenter
      * @var string[]
      */
     public $rules = [
-        'user_id'       => 'nullable|int',
+        'user_id'       => 'required|int',
         'component_id'  => 'nullable|int',
         'name'          => 'required|string',
         'status'        => 'required|int',
@@ -128,6 +129,7 @@ class Incident extends Model implements HasPresenter
         'stickied'      => 'required|bool',
         'notifications' => 'nullable|bool',
         'message'       => 'required|string',
+        'ticket'       => 'nullable|string',
     ];
 
     /**
@@ -143,6 +145,7 @@ class Incident extends Model implements HasPresenter
         'status',
         'visible',
         'stickied',
+        'ticket'
     ];
 
     /**
@@ -157,6 +160,7 @@ class Incident extends Model implements HasPresenter
         'status',
         'visible',
         'stickied',
+        'ticket',
         'message',
         'occurred_at',
     ];
