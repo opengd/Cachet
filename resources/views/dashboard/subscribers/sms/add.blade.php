@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-12">
         @include('partials.errors')
-        <form name="SubscriberForm" class="form-vertical" role="form" action="{{ cachet_route('dashboard.subscribers.sms', [], 'post') }}" method="POST">
+        <form name="SubscriberForm" class="form-vertical" role="form" action="{{ cachet_route('dashboard.subscribers.sms.add', [], 'post') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <fieldset>
             @if($subscribers->count() > 0)
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-success">{{ trans('forms.add') }}</button>
-                    <a class="btn btn-default" href="{{ cachet_route('dashboard.subscribers') }}">{{ trans('forms.cancel') }}</a>
+                    <a class="btn btn-default" href="{{ cachet_route('dashboard.subscribers.sms') }}">{{ trans('forms.cancel') }}</a>
                 </div>
             </div>
         </form>

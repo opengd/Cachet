@@ -63,10 +63,15 @@ class SubscriberRoutes
 
             $router->get('sms', [
                 'as'   => 'get:dashboard.subscribers.sms',
+                'uses' => 'SubscriberController@showSMSSubscribers',
+            ]);
+
+            $router->get('sms/add', [
+                'as'   => 'get:dashboard.subscribers.sms.add',
                 'uses' => 'SubscriberController@showAddSMSSubscriber',
             ]);
-            $router->post('sms', [
-                'as'   => 'post:dashboard.subscribers.sms',
+            $router->post('sms/add', [
+                'as'   => 'post:dashboard.subscribers.sms.add',
                 'uses' => 'SubscriberController@createSMSSubscriberAction',
             ]);
 

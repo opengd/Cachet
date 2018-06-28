@@ -24,12 +24,51 @@ use Illuminate\Support\Facades\View;
 class SubscriberController extends Controller
 {
     /**
+     * Stores the sub-sidebar tree list.
+     *
+     * @var array
+     */
+    protected $subMenu = [];
+
+    /**
+     * Creates a new subscriber controller instance.
+     *
+     * @param \Illuminate\Contracts\Auth\Guard $auth
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->subMenu = [
+            'subscribers' => [
+                'title'  => trans('dashboard.subscribers.subscribers'),
+                'url'    => cachet_route('dashboard.subscribers'),
+                'icon'   => '',
+                'active' => false,
+            ],
+            'sms' => [
+                'title'  => trans('dashboard.subscribers.sms.sms'),
+                'url'    => cachet_route('dashboard.subscribers.sms'),
+                'icon'   => '',
+                'active' => false,
+            ],
+        ];
+        
+        View::share([
+            'subMenu'  => $this->subMenu,
+            'subTitle' =>trans('dashboard.subscribers.subscribers'),
+        ]);
+    }
+
+    /**
      * Shows the subscribers view.
      *
      * @return \Illuminate\View\View
      */
     public function showSubscribers()
     {
+        $this->subMenu['subscribers']['active'] = true;
+
         return View::make('dashboard.subscribers.index')
             ->withPageTitle(trans('dashboard.subscribers.subscribers').' - '.trans('dashboard.dashboard'))
             ->withSubscribers(Subscriber::all());
@@ -89,13 +128,27 @@ class SubscriberController extends Controller
     }
 
     /**
+     * Shows the subscribers view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showSMSSubscribers()
+    {
+        $this->subMenu['sms']['active'] = true;
+
+        return View::make('dashboard.subscribers.sms.index')
+            ->withPageTitle(trans('dashboard.subscribers.sms.sms').' - '.trans('dashboard.dashboard'))
+            ->withSubscribers(Subscriber::all());
+    }
+
+    /**
      * Shows the add subscriber view.
      *
      * @return \Illuminate\View\View
      */
     public function showAddSMSSubscriber()
     {
-        return View::make('dashboard.subscribers.add-sms')
+        return View::make('dashboard.subscribers.sms.add')
             ->withPageTitle(trans('dashboard.subscribers.sms.add.title').' - '.trans('dashboard.dashboard'))
             ->withSubscribers(Subscriber::whereNull('sms_number')->get());
     }
@@ -126,7 +179,7 @@ class SubscriberController extends Controller
                 ->withErrors($e->getMessageBag());
         }
 
-        return cachet_redirect('dashboard.subscribers')
+        return cachet_redirect('dashboard.subscribers.sms')
             ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.sms.add.success')));
     }
 
