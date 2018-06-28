@@ -121,7 +121,6 @@ class Incident extends Model implements HasPresenter
      * @var string[]
      */
     public $rules = [
-<<<<<<< HEAD
         'user_id'       => 'required|int',
         'component_id'  => 'nullable|int',
         'name'          => 'required|string',
@@ -131,16 +130,6 @@ class Incident extends Model implements HasPresenter
         'notifications' => 'nullable|bool',
         'message'       => 'required|string',
         'ticket'       => 'nullable|string',
-=======
-        'user_id'      => 'required|int',
-        'component_id' => 'nullable|int',
-        'name'         => 'required|string',
-        'status'       => 'required|int',
-        'visible'      => 'required|bool',
-        'stickied'     => 'required|bool',
-        'message'      => 'required|string',
-        'ticket'       => 'nullable|string'
->>>>>>> babdb78... Added ticket text box to new and edit incident
     ];
 
     /**
