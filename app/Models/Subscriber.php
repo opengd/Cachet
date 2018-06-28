@@ -72,8 +72,6 @@ class Subscriber extends Model implements HasPresenter
         'phone_number'      => 'nullable|string',
         'slack_webhook_url' => 'nullable|url',
         'sms_number'        => 'nullable|string',
-        'email_notify'      =>  'required|bool',
-        'sms_notify'        => 'required|bool'
     ];
 
     /**
