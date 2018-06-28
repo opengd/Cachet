@@ -63,7 +63,7 @@
     </div>
 </div>
  
-@if($current_user->isAdmin && $enable_subscribers)
+@if($currentUser->isAdmin && $enableSubscribers)
 <div class="content-wrapper header-fixed">
     <a class="btn btn-md btn-success pull-right" href="{{ cachet_route('dashboard.subscribers.sms') }}">
         {{ trans('dashboard.subscribers.sms.add.title') }}
@@ -72,7 +72,7 @@
 @endif
 <div class="content-wrapper header-fixed">
     <p class="lead">
-        @if($enable_subscribers)
+        @if($enableSubscribers)
         {{ trans('dashboard.subscribers.sms.description') }}
         @else
         {{ trans('dashboard.subscribers.description_disabled') }}
