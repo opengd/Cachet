@@ -70,18 +70,29 @@ class Incident extends Model implements HasPresenter
     ];
 
     /**
+     * The model's attributes.
+     *
+     * @var string[]
+     */
+    protected $attributes = [
+        'stickied'      => false,
+        'notifications' => false,
+    ];
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var string[]
      */
     protected $casts = [
-        'component_id'=> 'int',
-        'status'      => 'int',
-        'user_id'     => 'int',
-        'visible'     => 'int',
-        'stickied'    => 'bool',
-        'occurred_at' => 'datetime',
-        'deleted_at'  => 'date',
+        'component_id'  => 'int',
+        'status'        => 'int',
+        'user_id'       => 'int',
+        'visible'       => 'int',
+        'stickied'      => 'bool',
+        'notifications' => 'bool',
+        'occurred_at'   => 'datetime',
+        'deleted_at'    => 'date',
     ];
 
     /**
@@ -96,6 +107,7 @@ class Incident extends Model implements HasPresenter
         'status',
         'visible',
         'stickied',
+        'notifications',
         'message',
         'occurred_at',
         'ticket',
@@ -115,6 +127,7 @@ class Incident extends Model implements HasPresenter
         'status'       => 'required|int',
         'visible'      => 'required|bool',
         'stickied'     => 'required|bool',
+        'notifications' => 'nullable|bool',
         'message'      => 'required|string',
         'ticket'       => 'nullable|string'
     ];

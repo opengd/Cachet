@@ -59,7 +59,7 @@ class SubscriberController extends Controller
             $subscribers = preg_split("/\r\n|\n|\r/", Binput::get('email'));
 
             foreach ($subscribers as $subscriber) {
-                dispatch(new SubscribeSubscriberCommand($subscriber, $verified));
+                execute(new SubscribeSubscriberCommand($subscriber, $verified));
             }
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.subscribers.create')
@@ -83,7 +83,7 @@ class SubscriberController extends Controller
      */
     public function deleteSubscriberAction(Subscriber $subscriber)
     {
-        dispatch(new UnsubscribeSubscriberCommand($subscriber));
+        execute(new UnsubscribeSubscriberCommand($subscriber));
 
         return cachet_redirect('dashboard.subscribers');
     }
