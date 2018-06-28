@@ -63,7 +63,7 @@ class CreateIncidentUpdateCommandHandler
         $update = IncidentUpdate::create($data);
 
         // Update the original incident with the new status.
-        dispatch(new UpdateIncidentCommand(
+        execute(new UpdateIncidentCommand(
             $command->incident,
             null,
             $command->status,
@@ -79,7 +79,7 @@ class CreateIncidentUpdateCommandHandler
             []
         ));
 
-        event(new IncidentUpdateWasReportedEvent($this->auth->user(), $update));
+        event(new IncidentUpdateWasReportedEvent($this->auth->user(), $update,  (bool) $command->notify));
 
         return $update;
     }
