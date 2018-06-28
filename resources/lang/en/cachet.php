@@ -137,5 +137,6 @@ return [
     'rss-feed'        => 'RSS',
     'atom-feed'       => 'Atom',
     'feed'            => 'Status Feed',
+    'get_subscribe'   => 'Subscribe and be notified on any new incidents or updates on current.'
 
 ];
