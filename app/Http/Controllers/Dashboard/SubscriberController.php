@@ -20,6 +20,7 @@ use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\MessageBag;
 
 class SubscriberController extends Controller
 {
@@ -138,6 +139,7 @@ class SubscriberController extends Controller
 
         return View::make('dashboard.subscribers.sms.index')
             ->withPageTitle(trans('dashboard.subscribers.sms.sms').' - '.trans('dashboard.dashboard'))
+            ->withAvaibleSubscribersCount(Subscriber::whereNull('sms_number')->count())
             ->withSubscribers(Subscriber::all());
     }
 
@@ -164,6 +166,10 @@ class SubscriberController extends Controller
 
             $subscriber = Subscriber::where('email', '=', Binput::get('subscribers'))->first();
 
+            if(!$subscriber) {
+                throw new ValidationException(new MessageBag([trans('dashboard.subscribers.sms.add.error.not_found')])); 
+            }
+
             dispatch(new UpdateSubscriberCommand($subscriber, 
                 $subscriber->email, 
                 Binput::get('sms-number'), 
@@ -173,7 +179,7 @@ class SubscriberController extends Controller
             ));
 
         } catch (ValidationException $e) {
-            return cachet_redirect('dashboard.subscribers.sms')
+            return cachet_redirect('dashboard.subscribers.sms.add')
                 ->withInput(Binput::all())
                 ->withTitle(sprintf('%s %s', trans('dashboard.notifications.whoops'), trans('dashboard.subscribers.sms.add.failure')))
                 ->withErrors($e->getMessageBag());

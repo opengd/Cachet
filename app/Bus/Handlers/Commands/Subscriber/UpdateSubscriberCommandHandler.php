@@ -46,7 +46,7 @@ class UpdateSubscriberCommandHandler
         $dup = Subscriber::where('email', $command->email)->where('id', '<>', $subscriber->id)->get();
 
         if($dup->count() > 0) {
-            throw new ValidationException(new MessageBag(['Duplicate emails']));    
+            throw new ValidationException(new MessageBag([trans('dashboard.subscribers.edit.error.duplicate')])); 
         } else if($subscriber->getIsVerifiedAttribute() && !$command->verified) {
             $subscriber->verified_at = null;
         } else if(!$subscriber->getIsVerifiedAttribute() && $command->verified) {

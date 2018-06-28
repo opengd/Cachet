@@ -6,7 +6,7 @@
         <i class="ion ion-navicon"></i>
     </div>
     <span class="uppercase">
-        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.subscribers') }}
+        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.sms.add.title') }}
     </span>
 </div>
 <div class="content-wrapper">

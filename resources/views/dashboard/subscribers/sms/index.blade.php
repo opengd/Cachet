@@ -11,7 +11,7 @@
             <span class="uppercase">
                 <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.sms.sms') }}
             </span>
-            @if($currentUser->isAdmin && $enableSubscribers)
+            @if($currentUser->isAdmin && $enableSubscribers && $avaibleSubscribersCount > 0)
             <a class="btn btn-md btn-success pull-right" href="{{ cachet_route('dashboard.subscribers.sms.add') }}">
                 {{ trans('dashboard.subscribers.sms.add.title') }}
             </a>

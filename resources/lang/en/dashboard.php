@@ -177,6 +177,9 @@ return [
             'title'   => 'Update subscriber',
             'success' => 'Subscriber has been updated!',
             'failure' => 'Something went wrong editing the subscriber, please try again.',
+            'error' => [
+                'duplicate' => 'Duplicate emails, subscriber already exist.'
+            ]
         ],
         'sms'                  => [
             'sms'           => 'SMS',
@@ -187,8 +190,11 @@ return [
             'add' => [
                 'title' => 'Add SMS subscription',
                 'success'   => 'SMS subscription have been added',
-                'failure'   => 'Something went wrong adding the SMS subsciptions, please try again',
-                'help'  => 'Enter the phone number for the SMS subsciption'
+                'failure'   => 'Something went wrong adding the SMS subsciptions, please try again.',
+                'help'  => 'Enter the phone number for the SMS subsciption',
+                'error' => [
+                    'not_found' => 'Unable to find matching subscriber.'
+                ]
             ]
         ]
     ],
