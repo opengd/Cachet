@@ -101,12 +101,13 @@ class IncidentUpdateController extends Controller
     public function createIncidentUpdateAction(Incident $incident)
     {
         try {
-            $incidentUpdate = dispatch(new CreateIncidentUpdateCommand(
+            $incidentUpdate = execute(new CreateIncidentUpdateCommand(
                 $incident,
                 Binput::get('status'),
                 Binput::get('message'),
                 Binput::get('component_id'),
                 Binput::get('component_status'),
+                Binput::get('notify'),
                 $this->auth->user()
             ));
         } catch (ValidationException $e) {
@@ -151,7 +152,7 @@ class IncidentUpdateController extends Controller
     public function editIncidentUpdateAction(Incident $incident, IncidentUpdate $incidentUpdate)
     {
         try {
-            $incidentUpdate = dispatch(new UpdateIncidentUpdateCommand(
+            $incidentUpdate = execute(new UpdateIncidentUpdateCommand(
                 $incidentUpdate,
                 Binput::get('status'),
                 Binput::get('message'),
