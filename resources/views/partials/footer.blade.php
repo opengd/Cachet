@@ -9,6 +9,14 @@
             </div>
             <div class="col-sm-4">
                 <ul class="list-inline">
+                    @if($showSupport)
+                    <p>
+                        {!! trans('cachet.powered_by') !!}
+                        @if($showTimezone)
+                        {{ trans('cachet.timezone', ['timezone' => $timezone]) }}
+                        @endif
+                    </p>
+                    @endif
                     @if($currentUser || $dashboardLink)
                     <li>
                         <a class="btn btn-link" href="{{ cachet_route('dashboard') }}">{{ trans('dashboard.dashboard') }}</a>
