@@ -255,7 +255,7 @@ class SubscriberController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showSMSEditSubscriber(Subscriber $subscriber)
+    public function showEditSMSSubscriber(Subscriber $subscriber)
     {
         return View::make('dashboard.subscribers.sms.edit')
             ->withPageTitle(trans('dashboard.subscribers.sms.edit.title').' - '.trans('dashboard.dashboard'))
@@ -285,7 +285,7 @@ class SubscriberController extends Controller
                 ->withErrors($e->getMessageBag());
         }
 
-        return cachet_redirect('dashboard.subscribers')
+        return cachet_redirect('dashboard.subscribers.sms')
             ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.sms.edit.success')));
     }
 }
