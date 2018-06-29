@@ -4,16 +4,6 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                @if($showSupport)
-                <p>
-                    {!! trans('cachet.powered_by') !!}
-                    @if($showTimezone)
-                    {{ trans('cachet.timezone', ['timezone' => $timezone]) }}
-                    @endif
-                </p>
-                @endif
-            </div>
             <div class="col-sm-8">
                 <h4>{{ trans('cachet.get_subscribe') }}</h4>
             </div>
