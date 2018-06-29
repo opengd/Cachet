@@ -77,11 +77,23 @@
     </script>
     <script src="{{ mix('dist/js/manifest.js') }}"></script>
     <script src="{{ mix('dist/js/vendor.js') }}"></script>
+
 </head>
 <body class="status-page @yield('bodyClass')">
     @yield('outer-content')
 
     @include('partials.banner')
+
+    <script>
+        // Remove Banner Image if page is inside of iframe.
+        if ( top !== self ) {
+            var appBanners = document.getElementsByClassName("app-banner");
+            
+            for(i = 0; i < appBanners.length; i++) {
+                appBanners[i].outerHTML = "";
+            }
+        }
+    </script>
 
     <div class="container" id="app">
         @yield('content')
