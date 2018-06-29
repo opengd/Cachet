@@ -181,21 +181,26 @@ return [
                 'duplicate' => 'Duplicate emails, subscriber already exist.'
             ]
         ],
-        'sms'                  => [
+        'sms' => [
             'sms'           => 'SMS',
-            'description' => 'Add a phone number to subscribers to send a SMS on incidents.',
-            'email' => 'Email',
-            'sms_number'  => 'SMS number',
-            'enabled'   => 'Enabled',
+            'description'   => 'Add a phone number to subscribers to send a SMS on incidents.',
+            'email'         => 'Email',
+            'sms_number'    => 'SMS number',
+            'enabled'       => 'Enabled',
             'add' => [
-                'title' => 'Add SMS subscription',
+                'title'     => 'Add SMS subscription',
                 'success'   => 'SMS subscription have been added',
                 'failure'   => 'Something went wrong adding the SMS subsciptions, please try again.',
-                'help'  => 'Enter the phone number for the SMS subsciption',
+                'help'      => 'Enter the phone number for the SMS subsciption',
                 'error' => [
                     'not_found' => 'Unable to find matching subscriber.'
                 ]
-            ]
+            ],
+            'edit' => [
+                'title'   => 'Update SMS subscriber',
+                'success' => 'Subscriber has been updated!',
+                'failure' => 'Something went wrong editing the SMS subscriber, please try again.',
+            ],
         ]
     ],
 

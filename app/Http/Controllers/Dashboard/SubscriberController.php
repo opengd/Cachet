@@ -233,10 +233,10 @@ class SubscriberController extends Controller
         try {
             dispatch(new UpdateSubscriberCommand($subscriber, 
                 Binput::get('email'), 
-                Binput::get('sms-number'), 
+                $subscriber->sms_number, 
                 Binput::get('verified', false), 
                 Binput::get('email-notify', false), 
-                Binput::get('sms-notify', false)
+                $subscriber->sms_notify
             ));
 
         } catch (ValidationException $e) {
@@ -248,5 +248,44 @@ class SubscriberController extends Controller
 
         return cachet_redirect('dashboard.subscribers')
             ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.edit.success')));
+    }
+
+    /**
+     * Shows the SMS edit subscriber view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showEditSMSSubscriber(Subscriber $subscriber)
+    {
+        return View::make('dashboard.subscribers.sms.edit')
+            ->withPageTitle(trans('dashboard.subscribers.sms.edit.title').' - '.trans('dashboard.dashboard'))
+            ->withSubscriber($subscriber);
+    }
+
+    /**
+     * Edit a SMS subscriber.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function editSMSSubscriberAction(Subscriber $subscriber)
+    {
+        try {
+            dispatch(new UpdateSubscriberCommand($subscriber, 
+                $subscriber->email, 
+                Binput::get('sms-number'), 
+                $subscriber->getIsVerifiedAttribute(), 
+                $subscriber->email_notify, 
+                Binput::get('sms-notify', false)
+            ));
+
+        } catch (ValidationException $e) {
+            return cachet_redirect('dashboard.subscribers.sms.edit', ['id' => $subscriber->id])
+                ->withInput(Binput::all())
+                ->withTitle(sprintf('%s %s', trans('dashboard.notifications.whoops'), trans('dashboard.subscribers.sms.edit.failure')))
+                ->withErrors($e->getMessageBag());
+        }
+
+        return cachet_redirect('dashboard.subscribers.sms')
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.sms.edit.success')));
     }
 }

@@ -88,6 +88,15 @@ class SubscriberRoutes
                 'as'   => 'post:dashboard.subscribers.edit',
                 'uses' => 'SubscriberController@editSubscriberAction',
             ]);
+
+            $router->get('{subscriber}/sms/edit', [
+                'as'   => 'get:dashboard.subscribers.sms.edit',
+                'uses' => 'SubscriberController@showEditSMSSubscriber',
+            ]);
+            $router->post('{subscriber}/sms/edit', [
+                'as'   => 'post:dashboard.subscribers.sms.edit',
+                'uses' => 'SubscriberController@editSMSSubscriberAction',
+            ]);
         });
     }
 }

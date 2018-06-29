@@ -18,20 +18,19 @@
             <fieldset>
 
             <div class="form-group">
-                <label for="email">{{ trans('forms.user.email') }}</label>
-                <input type="text" class="form-control" name="email" id="email" required value="{{$subscriber->email}}" placeholder="{{ trans('forms.user.email') }}">
+                <label>{{ trans('forms.user.email') }}</label>
+                <p>{{$subscriber->email}}</p>
             </div>
 
-            <input type="hidden" name="verified" value="0">
             <div class="form-group">
-                <label for="verified">{{ trans('dashboard.subscribers.verified') }}</label>
-                <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
+                <label for="sms-number">{{ trans('forms.user.sms_number') }}</label>
+                <input type="text" class="form-control" name="sms-number" id="sms-number" value="{{$subscriber->sms_number}}" placeholder="{{ trans('forms.user.sms_number') }}">
             </div>
 
-            <input type="hidden" name="email-notify" value="0">
+            <input type="hidden" name="sms-notify" value="0">
             <div class="form-group">
-                <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
-                <p><input name="email-notify" type="checkbox" value="1" {{ $subscriber->email_notify ? Binput::old('email_notify', 'checked') : "" }}></p>
+                <label for="sms-notify">{{ trans('dashboard.subscribers.sms_enabled') }}</label>
+                <p><input name="sms-notify" type="checkbox" value="1" {{ $subscriber->sms_notify ? Binput::old('sms_notify', 'checked') : "" }}></p>
             </div>
 
             </fieldset>
@@ -39,7 +38,7 @@
             <div class="form-group">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-success">{{ trans('forms.save') }}</button>
-                    <a class="btn btn-default" href="{{ cachet_route('dashboard.subscribers') }}">{{ trans('forms.cancel') }}</a>
+                    <a class="btn btn-default" href="{{ cachet_route('dashboard.subscribers.sms') }}">{{ trans('forms.cancel') }}</a>
                 </div>
             </div>
         </form>
