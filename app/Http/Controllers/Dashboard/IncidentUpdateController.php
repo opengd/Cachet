@@ -122,7 +122,7 @@ class IncidentUpdateController extends Controller
         }
 
         return cachet_redirect('dashboard.incidents')
-            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.incidents.updates.success')));
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.incidents.updates.add.success')));
     }
 
     /**
