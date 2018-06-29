@@ -18,7 +18,7 @@
             <fieldset>
 
             <div class="form-group">
-                <label for="sms-number">{{ trans('forms.user.email') }}</label>
+                <label for="email">{{ trans('forms.user.email') }}</label>
                 <input type="text" class="form-control" name="email" id="email" required value="{{$subscriber->email}}" placeholder="{{ trans('forms.user.email') }}">
             </div>
 
@@ -28,21 +28,10 @@
                 <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
             </div>
 
-            <div class="form-group">
-                <label for="sms-number">{{ trans('forms.user.sms_number') }}</label>
-                <input type="text" class="form-control" name="sms-number" id="sms-number" value="{{$subscriber->sms_number}}" placeholder="{{ trans('forms.user.sms_number') }}">
-            </div>
-
             <input type="hidden" name="email-notify" value="0">
             <div class="form-group">
                 <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
                 <p><input name="email-notify" type="checkbox" value="1" {{ $subscriber->email_notify ? Binput::old('email_notify', 'checked') : "" }}></p>
-            </div>
-
-            <input type="hidden" name="sms-notify" value="0">
-            <div class="form-group">
-                <label for="sms-notify">{{ trans('dashboard.subscribers.sms_enabled') }}</label>
-                <p><input name="sms-notify" type="checkbox" value="1" {{ $subscriber->sms_notify ? Binput::old('sms_notify', 'checked') : "" }}></p>
             </div>
 
             </fieldset>
