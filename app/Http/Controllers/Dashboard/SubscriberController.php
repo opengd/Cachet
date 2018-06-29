@@ -208,7 +208,7 @@ class SubscriberController extends Controller
             $subscriber->sms_notify
         ));
 
-        return cachet_redirect('dashboard.subscribers');
+        return cachet_redirect('dashboard.subscribers.sms');
     }
 
     /**
