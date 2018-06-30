@@ -177,6 +177,16 @@ class Subscriber extends Model implements HasPresenter
     }
 
     /**
+     * Route notifications for the Email channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email_notify ? $this->email : null;
+    }
+
+    /**
      * Route notifications for the Nexmo channel.
      *
      * @return string
