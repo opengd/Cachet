@@ -6,7 +6,7 @@
         <i class="ion ion-navicon"></i>
     </div>
     <span class="uppercase">
-        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.subscribers') }}
+        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.edit.title') }}
     </span>
 </div>
 <div class="content-wrapper">
@@ -24,13 +24,42 @@
 
             <input type="hidden" name="verified" value="0">
             <div class="form-group">
-                <label for="verified">{{ trans('dashboard.subscribers.verified') }}</label>
+                <label for="verified">{{ trans('dashboard.subscribers.edit.verified') }}</label>
                 <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
             </div>
 
+            @if($componentGroups->isNotEmpty() || $ungroupedComponents->isNotEmpty())
+            <label>{{ trans('dashboard.subscribers.edit.components') }}</label>
+            @foreach($componentGroups as $componentGroup)
+            <div class="list-group components">
+                @if($componentGroup->enabled_components->count() > 0)
+                <div class="list-group-item group-name">
+                    <strong>{{ $componentGroup->name }}</strong>
+                </div>
+                @foreach($componentGroup->enabled_components()->orderBy('order')->get() as $component)
+                @include('partials.component_input', compact($component))
+                @endforeach
+                @endif
+            </div>
+            @endforeach
+
+            @if($ungroupedComponents->isNotEmpty())
+            <ul class="list-group components">
+                <div class="list-group-item group-name">
+                    <strong>{{ trans('cachet.components.group.other') }}</strong>
+                </div>
+                @foreach($ungroupedComponents as $component)
+                @include('partials.component_input', compact($component))
+                @endforeach
+            </ul>
+            @endif
+            @else
+            <p>{{ trans('cachet.subscriber.manage.no_subscriptions') }}</p>
+            @endif
+
             <input type="hidden" name="email-notify" value="0">
             <div class="form-group">
-                <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
+                <label for="email-notify">{{ trans('dashboard.subscribers.edit.notify') }}</label>
                 <p><input name="email-notify" type="checkbox" value="1" {{ $subscriber->email_notify ? Binput::old('email_notify', 'checked') : "" }}></p>
             </div>
 

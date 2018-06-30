@@ -15,12 +15,16 @@ use AltThree\Validator\ValidationException;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\SubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UnsubscribeSubscriberCommand;
 use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberCommand;
+use CachetHQ\Cachet\Bus\Commands\Subscriber\UpdateSubscriberSubscriptionCommand;
 use CachetHQ\Cachet\Models\Subscriber;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
+use CachetHQ\Cachet\Models\Component;
+use CachetHQ\Cachet\Models\ComponentGroup;
+use CachetHQ\Cachet\Models\Subscription;
 
 class SubscriberController extends Controller
 {
@@ -217,10 +221,17 @@ class SubscriberController extends Controller
      * @return \Illuminate\View\View
      */
     public function showEditSubscriber(Subscriber $subscriber)
-    {
+    {        
+        $usedComponentGroups = Component::enabled()->where('group_id', '>', 0)->groupBy('group_id')->pluck('group_id');
+        $componentGroups = ComponentGroup::whereIn('id', $usedComponentGroups)->orderBy('order')->get();
+        $ungroupedComponents = Component::enabled()->where('group_id', '=', 0)->orderBy('order')->orderBy('created_at')->get();
+
         return View::make('dashboard.subscribers.edit')
             ->withPageTitle(trans('dashboard.subscribers.edit.title').' - '.trans('dashboard.dashboard'))
-            ->withSubscriber($subscriber);
+            ->withSubscriber($subscriber)
+            ->withUngroupedComponents($ungroupedComponents)
+            ->withSubscriptions($subscriber->subscriptions->pluck('component_id')->all())
+            ->withComponentGroups($componentGroups);
     }
 
     /**
@@ -238,6 +249,8 @@ class SubscriberController extends Controller
                 Binput::get('email-notify', false), 
                 $subscriber->sms_notify
             ));
+
+            execute(new UpdateSubscriberSubscriptionCommand($subscriber, Binput::get('subscriptions')));
 
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.subscribers.edit', ['id' => $subscriber->id])

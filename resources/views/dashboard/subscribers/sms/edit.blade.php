@@ -6,7 +6,7 @@
         <i class="ion ion-navicon"></i>
     </div>
     <span class="uppercase">
-        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.subscribers') }}
+        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.sms.edit.title') }}
     </span>
 </div>
 <div class="content-wrapper">
@@ -29,7 +29,7 @@
 
             <input type="hidden" name="sms-notify" value="0">
             <div class="form-group">
-                <label for="sms-notify">{{ trans('dashboard.subscribers.sms_enabled') }}</label>
+                <label for="sms-notify">{{ trans('dashboard.subscribers.sms.edit.notify') }}</label>
                 <p><input name="sms-notify" type="checkbox" value="1" {{ $subscriber->sms_notify ? Binput::old('sms_notify', 'checked') : "" }}></p>
             </div>
 
