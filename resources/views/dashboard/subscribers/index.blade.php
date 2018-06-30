@@ -29,19 +29,40 @@
                 </p>
 
                 <div class="striped-list">
+                    <div class="row striped-list-item">
+                            <div class="col-xs-3">
+                                <p>{{ trans('dashboard.subscribers.sms.subscriber') }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                <p>{{ trans('dashboard.subscribers.verified') }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                <p>{{ trans('dashboard.subscribers.notify') }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                <p>{{ trans('dashboard.subscribers.components') }}</p>
+                            </div>
+                            <div class="col-xs-3">
+                            </div>
+                        </div>
                     @foreach($subscribers as $subscriber)
                     <div class="row striped-list-item">
                         <div class="col-xs-3">
-                            <p>{{ trans('dashboard.subscribers.subscriber', ['email' => $subscriber->email, 'date' => $subscriber->created_at]) }}</p>
+                            <p style="word-break: break-all;">{{ trans('dashboard.subscribers.subscriber', ['email' => $subscriber->email, 'date' => $subscriber->created_at]) }}</p>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2">
                             @if(is_null($subscriber->getOriginal('verified_at')))
                             <b class="text-danger">{{ trans('dashboard.subscribers.not_verified') }}</b>
                             @else
                             <b class="text-success">{{ trans('dashboard.subscribers.verified') }}</b>
                             @endif
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2">
+                            @if($subscriber->sms_notify)
+                            <p><i class="ion ion ion-checkmark"></i></p>
+                            @endif
+                        </div>
+                        <div class="col-xs-2">
                             @if($subscriber->global)
                             <p>{{ trans('dashboard.subscribers.global') }}</p>
                             @elseif($subscriber->subscriptions->isNotEmpty())

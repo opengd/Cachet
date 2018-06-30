@@ -165,7 +165,8 @@ return [
         'subscriber'           => ':email, subscribed :date',
         'no_subscriptions'     => 'Subscribed to no components',
         'global'               => 'Globally subscribed',
-        'email_enabled'        => 'Email enabled',
+        'notify'               => 'Notify',
+        'components'           => 'Components',
         'add'                  => [
             'title'   => 'Add a new subscriber',
             'success' => 'Subscriber has been added!',
