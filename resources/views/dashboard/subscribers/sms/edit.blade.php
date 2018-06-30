@@ -29,7 +29,7 @@
 
             <input type="hidden" name="sms-notify" value="0">
             <div class="form-group">
-                <label for="sms-notify">{{ trans('dashboard.subscribers.sms_enabled') }}</label>
+                <label for="sms-notify">{{ trans('dashboard.subscribers.sms.enabled') }}</label>
                 <p><input name="sms-notify" type="checkbox" value="1" {{ $subscriber->sms_notify ? Binput::old('sms_notify', 'checked') : "" }}></p>
             </div>
 

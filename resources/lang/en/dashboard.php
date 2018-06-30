@@ -166,7 +166,6 @@ return [
         'no_subscriptions'     => 'Subscribed to no components',
         'global'               => 'Globally subscribed',
         'email_enabled'        => 'Email enabled',
-        'sms_enabled'          => 'SMS enabled',
         'add'                  => [
             'title'   => 'Add a new subscriber',
             'success' => 'Subscriber has been added!',
@@ -174,16 +173,20 @@ return [
             'help'    => 'Enter each subscriber on a new line.',
         ],
         'edit' => [
-            'title'   => 'Update subscriber',
-            'success' => 'Subscriber has been updated!',
-            'failure' => 'Something went wrong editing the subscriber, please try again.',
+            'title'     => 'Update subscriber',
+            'success'   => 'Subscriber has been updated!',
+            'failure'   => 'Something went wrong editing the subscriber, please try again.',
             'error' => [
                 'duplicate' => 'Duplicate emails, subscriber already exist.'
-            ]
+            ],
+            'verified'  => 'Email verified',
+            'notify'    => 'Notify subscriber by email',
+            'components'    => 'Components subscriptions'
         ],
         'sms' => [
+            'subscriber'   => 'Subscriber',
             'sms'           => 'SMS',
-            'description'   => 'Add a phone number to subscribers to send a SMS on incidents.',
+            'description'   => 'Add a phone number to a subscriber and the subscriber will be notify via SMS.',
             'email'         => 'Email',
             'sms_number'    => 'SMS number',
             'enabled'       => 'Enabled',

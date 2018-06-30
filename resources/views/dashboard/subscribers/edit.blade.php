@@ -6,7 +6,7 @@
         <i class="ion ion-navicon"></i>
     </div>
     <span class="uppercase">
-        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.subscribers') }}
+        <i class="ion ion-ios-email-outline"></i> {{ trans('dashboard.subscribers.edit.title') }}
     </span>
 </div>
 <div class="content-wrapper">
@@ -24,11 +24,12 @@
 
             <input type="hidden" name="verified" value="0">
             <div class="form-group">
-                <label for="verified">{{ trans('dashboard.subscribers.verified') }}</label>
+                <label for="verified">{{ trans('dashboard.subscribers.edit.verified') }}</label>
                 <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
             </div>
 
             @if($componentGroups->isNotEmpty() || $ungroupedComponents->isNotEmpty())
+            <label>{{ trans('dashboard.subscribers.edit.components') }}</label>
             @foreach($componentGroups as $componentGroup)
             <div class="list-group components">
                 @if($componentGroup->enabled_components->count() > 0)
@@ -58,7 +59,7 @@
 
             <input type="hidden" name="email-notify" value="0">
             <div class="form-group">
-                <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
+                <label for="email-notify">{{ trans('dashboard.subscribers.edit.notify') }}</label>
                 <p><input name="email-notify" type="checkbox" value="1" {{ $subscriber->email_notify ? Binput::old('email_notify', 'checked') : "" }}></p>
             </div>
 

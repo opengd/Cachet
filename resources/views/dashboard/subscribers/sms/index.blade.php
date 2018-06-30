@@ -31,7 +31,7 @@
                 <div class="striped-list">
                     <div class="row striped-list-item">
                         <div class="col-xs-3">
-                            <p>{{ trans('dashboard.subscribers.sms.email') }}</p>
+                            <p>{{ trans('dashboard.subscribers.sms.subscriber') }}</p>
                         </div>
                         <div class="col-xs-3">
                             <p>{{ trans('dashboard.subscribers.sms.sms_number') }}</p>
