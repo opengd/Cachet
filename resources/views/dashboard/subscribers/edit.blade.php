@@ -28,6 +28,34 @@
                 <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
             </div>
 
+            @if($componentGroups->isNotEmpty() || $ungroupedComponents->isNotEmpty())
+            @foreach($componentGroups as $componentGroup)
+            <div class="list-group components">
+                @if($componentGroup->enabled_components->count() > 0)
+                <div class="list-group-item group-name">
+                    <strong>{{ $componentGroup->name }}</strong>
+                </div>
+                @foreach($componentGroup->enabled_components()->orderBy('order')->get() as $component)
+                @include('partials.component_input', compact($component))
+                @endforeach
+                @endif
+            </div>
+            @endforeach
+
+            @if($ungroupedComponents->isNotEmpty())
+            <ul class="list-group components">
+                <div class="list-group-item group-name">
+                    <strong>{{ trans('cachet.components.group.other') }}</strong>
+                </div>
+                @foreach($ungroupedComponents as $component)
+                @include('partials.component_input', compact($component))
+                @endforeach
+            </ul>
+            @endif
+            @else
+            <p>{{ trans('cachet.subscriber.manage.no_subscriptions') }}</p>
+            @endif
+
             <input type="hidden" name="email-notify" value="0">
             <div class="form-group">
                 <label for="email-notify">{{ trans('dashboard.subscribers.email_enabled') }}</label>
