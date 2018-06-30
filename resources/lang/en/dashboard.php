@@ -163,7 +163,7 @@ return [
         'verified'             => 'Verified',
         'not_verified'         => 'Not verified',
         'subscriber'           => ':email, subscribed :date',
-        'no_subscriptions'     => 'Subscribed to all updates',
+        'no_subscriptions'     => 'Subscribed to no components',
         'global'               => 'Globally subscribed',
         'email_enabled'        => 'Email enabled',
         'sms_enabled'          => 'SMS enabled',
