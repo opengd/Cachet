@@ -37,7 +37,7 @@
                             <p>{{ trans('dashboard.subscribers.sms.sms_number') }}</p>
                         </div>
                         <div class="col-xs-6">
-                            <p>{{ trans('dashboard.subscribers.sms.enabled') }}</p>
+                            <p>{{ trans('dashboard.subscribers.sms.notify') }}</p>
                         </div>
                     </div>
                 @foreach($subscribers as $subscriber)
