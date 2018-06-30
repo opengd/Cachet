@@ -58,7 +58,7 @@
                             @endif
                         </div>
                         <div class="col-xs-2">
-                            @if($subscriber->sms_notify)
+                            @if($subscriber->email_notify)
                             <p><i class="ion ion ion-checkmark"></i></p>
                             @endif
                         </div>
