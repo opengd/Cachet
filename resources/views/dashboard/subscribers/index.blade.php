@@ -48,7 +48,10 @@
                     @foreach($subscribers as $subscriber)
                     <div class="row striped-list-item">
                         <div class="col-xs-3">
-                            <p style="word-break: break-all;">{{ trans('dashboard.subscribers.subscriber', ['email' => $subscriber->email, 'date' => $subscriber->created_at]) }}</p>
+                            <p style="word-break: break-all;">
+                                <a href="mailto:{{ $subscriber->email }}">{{ $subscriber->email }}</a>
+                                <p><small>{{ trans('dashboard.subscribers.subscribed', ['date' => $subscriber->created_at]) }}</small></p>
+                            </p>
                         </div>
                         <div class="col-xs-2">
                             @if(is_null($subscriber->getOriginal('verified_at')))
@@ -77,7 +80,7 @@
                             <p><input name="agree" type="checkbox" value="1"></p>
                         </div>--}}
                         <div class="col-xs-3 text-right">
-                            <a href="{{ cachet_route('dashboard.subscribers.edit', [$subscriber->id]) }}" class="btn btn-default">{{ trans('forms.edit') }}</a>
+                            <a href="{{ cachet_route('dashboard.subscribers.edit', [$subscriber->id]) }}" class="btn btn-info">{{ trans('forms.manage') }}</a>
                             <a href="{{ cachet_route('dashboard.subscribers.delete', [$subscriber->id], 'delete') }}" class="btn btn-danger confirm-action" data-method='DELETE'>{{ trans('forms.delete') }}</a>
                         </div>
                     </div>

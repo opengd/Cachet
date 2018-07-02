@@ -244,6 +244,7 @@ return [
     'invite'         => 'Invite',
     'signup'         => 'Sign Up',
     'manage_updates' => 'Manage Updates',
+    'manage'         => 'Manage',
 
     // Other
     'optional' => '* Optional',

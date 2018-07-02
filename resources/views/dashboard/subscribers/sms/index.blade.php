@@ -44,7 +44,9 @@
                     @if($subscriber->sms_number)
                     <div class="row striped-list-item">
                         <div class="col-xs-3">
-                            <p>{{ $subscriber->email}}</p>
+                            <p style="word-break: break-all;">
+                                <a href="mailto:{{ $subscriber->email }}">{{ $subscriber->email }}</a>
+                            </p>
                         </div>
                         <div class="col-xs-3">
                             <p>{{ $subscriber->sms_number }}</p>
@@ -55,7 +57,7 @@
                         @endif
                         </div>
                         <div class="col-xs-3 text-right">
-                            <a href="{{ cachet_route('dashboard.subscribers.sms.edit', [$subscriber->id]) }}" class="btn btn-default">{{ trans('forms.edit') }}</a>
+                            <a href="{{ cachet_route('dashboard.subscribers.sms.edit', [$subscriber->id]) }}" class="btn btn-info">{{ trans('forms.manage') }}</a>
                             <a href="{{ cachet_route('dashboard.subscribers.delete_sms', [$subscriber->id], 'delete') }}" class="btn btn-danger" data-method='DELETE'>{{ trans('forms.delete') }}</a>
                         </div>
                     </div>

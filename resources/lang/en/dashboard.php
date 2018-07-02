@@ -167,6 +167,7 @@ return [
         'global'               => 'Globally subscribed',
         'notify'               => 'Notify',
         'components'           => 'Components',
+        'subscribed'           => 'Subscribed: :date',
         'add'                  => [
             'title'   => 'Add a new subscriber',
             'success' => 'Subscriber has been added!',
@@ -182,7 +183,7 @@ return [
             ],
             'verified'  => 'Email verified',
             'notify'    => 'Notify subscriber by email',
-            'components'    => 'Components subscriptions'
+            'components'    => 'Component subscriptions'
         ],
         'sms' => [
             'subscriber'   => 'Subscriber',
