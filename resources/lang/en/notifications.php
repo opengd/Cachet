@@ -40,7 +40,7 @@ return [
                 'content' => 'A new incident was reported at :app_name',
             ],
             'sms' => [
-                'content' => 'New incident :name was reported. :ticket',
+                'content' => 'New incident :name was reported. Status :new_status. :ticket',
             ],
         ],
         'update' => [
@@ -55,7 +55,7 @@ return [
                 'content' => ':name was updated to :new_status',
             ],
             'sms' => [
-                'content' => 'Incident :name was updated. :ticket',
+                'content' => 'Incident :name was updated to :new_status. :ticket',
             ],
         ],
     ],

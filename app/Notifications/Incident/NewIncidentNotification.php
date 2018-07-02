@@ -152,6 +152,7 @@ class NewIncidentNotification extends Notification
     {        
         return (new SMSMessage())->content(trans('notifications.incident.new.sms.content', [
             'name' => $this->incident->name,
+            'new_status' => $this->incident->human_status,
             'ticket' => $this->incident->ticket != null && $this->incident->ticket != "" ? $this->incident->ticket : ""  
         ]));
     }

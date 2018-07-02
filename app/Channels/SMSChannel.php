@@ -16,13 +16,12 @@ class SMSChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! ($to = $notifiable->routeNotificationFor('sms')) || !$notifiable->sms_notify) {
+        if (! ($to = $notifiable->routeNotificationFor('sms'))) {
             return;
         }
 
         $message = $notification->toSMS($notifiable);
-
-        /*
+   
         $request = \Illuminate\Http\Request::create(config('sms.url'), 
             'GET', [
                     'username' => config('sms.username'), 
@@ -31,10 +30,10 @@ class SMSChannel
                     'to'=> $to, 
                     'text' => $message->content
                 ]);
-        */
+        
 
         //Log::error($this->email . ":sendCreateIncidentSMSDirect: " . $incident->name);
 
-        Log::error($to . ":Send SMS:" . $message->content);
+        Log::error($to . ":Send SMS:" . $message->content . "#####" . serialize($request));
     }
 }

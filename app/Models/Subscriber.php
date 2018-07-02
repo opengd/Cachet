@@ -213,7 +213,7 @@ class Subscriber extends Model implements HasPresenter
      */
     public function routeNotificationForSMS()
     {
-        return $this->sms_number;
+        return $this->sms_notify ? $this->sms_number : null;
     }
 
     /**

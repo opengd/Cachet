@@ -161,6 +161,7 @@ class IncidentUpdatedNotification extends Notification
     {
         $content = trans('notifications.incident.update.sms.content', [
             'name' => $this->update->incident->name,
+            'new_status' => $this->update->human_status,
             'ticket' => $this->update->incident->ticket != null && $this->update->incident->ticket != "" ? $this->update->incident->ticket : ""
         ]);
 
