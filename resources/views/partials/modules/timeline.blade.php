@@ -1,4 +1,13 @@
 @if($daysToShow > 0 && $allIncidents)
+@php
+$total_incidents = 0;
+@endphp
+@foreach($allIncidents as $date => $incidents)
+@php
+$total_incidents += count($incidents);
+@endphp
+@endforeach
+@if($total_incidents > 0)
 <div class="section-timeline">
     <h1>{{ trans('cachet.incidents.past') }}</h1>
     @foreach($allIncidents as $date => $incidents)
@@ -24,4 +33,5 @@
         @endif
     </ul>
 </nav>
+@endif
 @endif
