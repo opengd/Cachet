@@ -9,7 +9,7 @@ $total_incidents += count($incidents);
 @endforeach
 @if($total_incidents > 0)
 <div class="section-timeline">
-    <h1>{{ trans('cachet.incidents.past') }}</h1>
+    <h1>{{ trans('cachet.incidents.ongoing') }}</h1>
     @foreach($allIncidents as $date => $incidents)
     @include('partials.incidents', [compact($date), compact($incidents)])
     @endforeach
