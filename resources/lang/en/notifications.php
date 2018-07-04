@@ -34,6 +34,7 @@ return [
                 'greeting' => 'A new incident was reported at :app_name.',
                 'content'  => 'Incident :name was reported',
                 'action'   => 'View',
+                'reference' => 'Reference :reference'
             ],
             'slack' => [
                 'title'   => 'Incident :name Reported',

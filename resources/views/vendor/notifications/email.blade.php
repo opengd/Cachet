@@ -143,6 +143,10 @@ $style = [
                                             Regards,<br>{{ setting('app_name', config('app.name')) }}
                                         </p>
 
+                                        <h2>
+                                            HFGSGFSFSFSFSFDSFSFSFSFSFSFSFSFSFSFSFSFSF
+                                                        </h2>
+
                                         <!-- Sub Copy -->
                                         @if (isset($actionText))
                                             <table style="{{ $style['body_sub'] }}">

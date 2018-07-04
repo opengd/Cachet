@@ -1,24 +1,13 @@
 /* Base */
 
 body, body *:not(html):not(style):not(br):not(tr):not(code) {
-    font-family: Avenir, Helvetica, sans-serif;
+    font-family: "Oswald", Helvetica, Arial, sans-serif;
     box-sizing: border-box;
 }
 
 body {
     background-color: #ffffff;
-    color: #74787E;
-    height: 100%;
-    hyphens: auto;
-    line-height: 1.4;
-    margin: 0;
-    -moz-hyphens: auto;
-    -ms-word-break: break-all;
-    width: 100% !important;
-    -webkit-hyphens: auto;
-    -webkit-text-size-adjust: none;
-    word-break: break-all;
-    word-break: break-word;
+
 }
 
 p,
@@ -30,7 +19,7 @@ blockquote {
 }
 
 a {
-    color: #3869D4;
+    color: #326482;
 }
 
 a img {
@@ -59,14 +48,6 @@ h3 {
     color: #2F3133;
     font-size: 14px;
     font-weight: bold;
-    margin-top: 0;
-    text-align: left;
-}
-
-p {
-    color: #74787E;
-    font-size: 16px;
-    line-height: 1.5em;
     margin-top: 0;
     text-align: left;
 }
@@ -152,7 +133,7 @@ img {
 /* Subcopy */
 
 .subcopy {
-    border-top: 1px solid #EDEFF2;
+    border-top: 1px solid #497b99;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -190,7 +171,7 @@ img {
 }
 
 .table th {
-    border-bottom: 1px solid #EDEFF2;
+    border-bottom: 1px solid #497b99;
     padding-bottom: 8px;
 }
 
@@ -224,14 +205,15 @@ img {
     display: inline-block;
     text-decoration: none;
     -webkit-text-size-adjust: none;
+    margin-top: 30px;
 }
 
 .button-blue {
-    background-color: #3097D1;
-    border-top: 10px solid #3097D1;
-    border-right: 18px solid #3097D1;
-    border-bottom: 10px solid #3097D1;
-    border-left: 18px solid #3097D1;
+    background-color: #5081A0;
+    border-top: 10px solid #5081A0;
+    border-right: 18px solid #5081A0;
+    border-bottom: 10px solid #5081A0;
+    border-left: 18px solid #5081A0;
 }
 
 .button-green {

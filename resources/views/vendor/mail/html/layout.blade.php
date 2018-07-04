@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet" />
 <body>
     <style>
         @media only screen and (max-width: 600px) {
@@ -21,34 +21,86 @@
                 width: 100% !important;
             }
         }
+
+        body {
+            font-family: "Roboto", Helvetica, Arial, sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+            /* height: 300px; */
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            background-color: rgb(237, 237, 237);
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .container {
+            padding: 15px;
+            background-color: #ffffff;
+            width: 700px;
+            margin: auto;
+        }
+
+        h2 {
+            font-family: "Oswald", Helvetica, Arial, sans-serif;
+            line-height: 1.5; 
+            font-size: 25px; 
+            font-weight: 500;
+        }
+
+        p {
+            font-family: "Roboto", Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            font-size: 14px;
+            font-weight: 300;
+            color: black;
+        }
+
+        small {
+            font-family: "Roboto", Helvetica, Arial, sans-serif;
+            line-height: 1;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        img {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .line {
+            margin-top: 30px;
+            margin-bottom: 5px;
+        }
+
+        .brg {
+            color: rgb(60, 60, 60);
+        }
+
+        a:link {
+            font-family: "Roboto", Helvetica, Arial, sans-serif;
+            color: #326482;
+            background-color: transparent;
+            text-decoration: line;
+        }
+
+        .view {
+            margin-top: 30px;
+            margin-bottom: 30px; 
+        }
+
     </style>
+    <div class="flex-container">
+        <div class="container">
+            {{ $header or '' }}
 
-    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <td align="center">
-                <table class="content" width="100%" cellpadding="0" cellspacing="0">
-                    {{ $header or '' }}
-
-                    <!-- Email Body -->
-                    <tr>
-                        <td class="body" width="100%" cellpadding="0" cellspacing="0">
-                            <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
-                                <!-- Body content -->
-                                <tr>
-                                    <td class="content-cell">
-                                        {{ Illuminate\Mail\Markdown::parse($slot) }}
-
-                                        {{ $subcopy or '' }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    {{ $footer or '' }}
-                </table>
-            </td>
-        </tr>
-    </table>
+            {{ Illuminate\Mail\Markdown::parse($slot) }}
+            {{ $subcopy or '' }}
+            {{ $footer or '' }}
+        </div>
+    </div>
 </body>
 </html>
