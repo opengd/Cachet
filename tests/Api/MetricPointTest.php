@@ -39,6 +39,38 @@ class MetricPointTest extends AbstractApiTestCase
         $response->assertStatus(200);
     }
 
+    public function test_can_get_all_metric_points_in_order_by_latests()
+    {
+        $metric = factory(Metric::class)->create();
+        $metricPoint1 = factory(MetricPoint::class)->create([
+            'metric_id'  => $metric->id,
+            'created_at' => Carbon::parse('2016-12-01 2:00pm'),
+            'updated_at' => Carbon::parse('2016-12-01 2:00pm'),
+        ]);
+        $metricPoint2 = factory(MetricPoint::class)->create([
+            'metric_id'  => $metric->id,
+            'created_at' => Carbon::parse('2016-12-01 1:00pm'),
+            'updated_at' => Carbon::parse('2016-12-01 1:00pm'),
+        ]);
+        $metricPoint3 = factory(MetricPoint::class)->create([
+            'metric_id'  => $metric->id,
+            'created_at' => Carbon::parse('2016-12-01 4:00pm'),
+            'updated_at' => Carbon::parse('2016-12-01 4:00pm'),
+        ]);
+
+        $response = $this->json('GET', "/api/v1/metrics/{$metric->id}/points");
+
+        $response->assertJson([
+            'data' => [
+                ['id' => $metricPoint3->id],
+                ['id' => $metricPoint1->id],
+                ['id' => $metricPoint2->id],
+            ],
+        ]);
+
+        $response->assertStatus(200);
+    }
+
     public function test_cannot_create_metric_point_without_authorization()
     {
         $metric = factory(Metric::class)->create();
@@ -68,20 +100,26 @@ class MetricPointTest extends AbstractApiTestCase
     {
         $this->beUser();
 
+        // prevent tests breaking due to rolling into the next second
+        Carbon::setTestNow(Carbon::now());
+
         $metric = factory(Metric::class)->create();
-        $timestamp = strtotime('now');
+        $createdAt = Carbon::now();
         $metricPoint = factory(MetricPoint::class)->make([
             'metric_id' => $metric->id,
         ]);
         $postData = $metricPoint->toArray();
-        $postData['timestamp'] = $timestamp;
+        $postData['timestamp'] = $createdAt->timestamp;
 
         $response = $this->json('POST', "/api/v1/metrics/{$metric->id}/points", $postData);
+
+        // Round value to match ours
+        $timestamp = 30 * round($createdAt->timestamp / 30);
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
             'value'      => $metricPoint->value,
-            'created_at' => date('Y-m-d H:i:s', $timestamp),
+            'created_at' => Carbon::createFromFormat('U', $timestamp)->setTimezone(config('cachet.timezone'))->toDateTimeString(),
         ]);
     }
 
@@ -94,17 +132,23 @@ class MetricPointTest extends AbstractApiTestCase
 
         $timezone = 'America/Mexico_City';
         $metric = factory(Metric::class)->create();
-        $datetime = Carbon::now()->timezone($timezone);
+        $createdAt = Carbon::now()->timezone($timezone);
         $metricPoint = factory(MetricPoint::class)->make([
             'metric_id' => $metric->id,
         ]);
         $postData = $metricPoint->toArray();
-        $postData['timestamp'] = $datetime->timestamp;
+        $postData['timestamp'] = $createdAt->timestamp;
 
         $response = $this->json('POST', "/api/v1/metrics/{$metric->id}/points", $postData, ['Time-Zone' => $timezone]);
 
+        // Round value to match ours
+        $timestamp = 30 * round($createdAt->timestamp / 30);
+
         $response->assertStatus(200);
-        $response->assertJsonFragment(['value' => $metricPoint->value, 'created_at' => $datetime->toDateTimeString()]);
+        $response->assertJsonFragment([
+            'value'      => $metricPoint->value,
+            'created_at' => Carbon::createFromFormat('U', $timestamp)->setTimezone($timezone)->toDateTimeString(),
+        ]);
     }
 
     public function test_can_update_metric_point()
