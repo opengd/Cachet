@@ -489,6 +489,14 @@ class SettingsController extends Controller
             }
         }
 
+        if (isset($parameters['mail-thanks-from'])) {
+            if ($mail_thanks_from = Binput::get('mail-thanks-from', null, false, false)) {
+                $setting->set('mail-thanks-from', $mail_thanks_from);
+            } else {
+                $setting->delete('mail-thanks-from');
+            }
+        }
+
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

@@ -11,8 +11,8 @@
 <img class="line" alt="Linje" height="6" src="{{ Config::get('setting.mail-thanks-image-url') }}" width="125" />
 @endif
 
-<p class="brg">Best regards,<br>
-{{ Config::get('setting.app_name') }}</p>
+@component('mail::thanks')
+@endcomponent
 
 @include('notifications.partials.subscription')
 

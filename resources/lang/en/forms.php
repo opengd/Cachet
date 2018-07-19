@@ -207,6 +207,7 @@ return [
             'banner-image'            => 'Banner image URL',
             'mail-header-image'       => 'Mail header image URL',
             'mail-thanks-image'       => 'Mail thanks image URL',
+            'mail-thanks-from'        => 'Mail thanks from'
         ]
     ],
 

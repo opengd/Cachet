@@ -39,6 +39,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>{{ trans('forms.settings.extra.mail-thanks-from') }}</label>
+                                    <input type="text" class="form-control" name="mail-thanks-from" value="{{ Config::get('setting.mail-thanks-from') }}" placeholder="{{ trans('forms.settings.extra.mail-thanks-from') }}">
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
 
                     <div class="row">

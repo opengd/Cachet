@@ -11,14 +11,11 @@
 <img class="line" alt="Linje" height="6" src="{{ Config::get('setting.mail-thanks-image-url') }}" width="125" />
 @endif
 
-<p class="brg">Best regards,<br>
-{{ Config::get('setting.app_name') }}</p>
+@component('mail::thanks')
+@endcomponent
 
-@if($update->incident->ticket && $update->incident->ticket != "" && filter_var($update->incident->ticket, FILTER_VALIDATE_URL))
-<small>{{ trans('notifications.incident.new.mail.reference', ['reference' => basename(parse_url($update->incident->ticket, PHP_URL_PATH))] ) }}</small>
-@elseif($update->incident->ticket && $update->incident->ticket != "")
-<small>{{ trans('notifications.incident.new.mail.reference', ['reference' => Str::words($update->incident->ticket)] ) }}</small>
-@endif
+@component('mail::ticket', ['ticket' => $update->incident->ticket, 'trans' => 'notifications.incident.new.mail.reference'])
+@endcomponent
 
 @include('notifications.partials.subscription')
 
