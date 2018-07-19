@@ -203,6 +203,10 @@ return [
             'metrics'                 => 'Metrics fill',
             'links'                   => 'Links',
         ],
+        'extra' => [
+            'banner-image'            => 'Banner image URL',
+            'mail-header-image'       => 'Mail header image URL',
+        ]
     ],
 
     'user' => [

@@ -113,6 +113,12 @@ class SettingsController extends Controller
                 'icon'   => 'ion-flag',
                 'active' => false,
             ],
+            'extra' => [
+                'title'  => trans('dashboard.settings.extra.extra'),
+                'url'    => cachet_route('dashboard.settings.extra'),
+                'icon'   => 'ion-paintbrush',
+                'active' => false,
+            ],
         ];
 
         View::share([
@@ -327,6 +333,22 @@ class SettingsController extends Controller
     }
 
     /**
+     * Shows the settings extra view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showExtraView()
+    {
+        $this->subMenu['theme']['active'] = true;
+
+        Session::flash('redirect_to', $this->subMenu['theme']['url']);
+
+        return View::make('dashboard.settings.extra')
+            ->withPageTitle(trans('dashboard.settings.extra.extra').' - '.trans('dashboard.dashboard'))
+            ->withSubMenu($this->subMenu);
+    }
+
+    /**
      * Updates the status page settings.
      *
      * @return \Illuminate\View\View
@@ -434,5 +456,31 @@ class SettingsController extends Controller
 
         // Store the banner type.
         $setting->set('app_banner_type', $file->getMimeType());
+    }
+
+    /**
+     * Updates the status page settings.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function postExtraSettings()
+    {
+        if (isset($parameters['banner-image-url'])) {
+            if ($banner_image_url = Binput::get('banner-image-url', null, false, false)) {
+                $setting->set('banner-image-url', $banner_image_url);
+            } else {
+                $setting->delete('banner-image-url');
+            }
+        }
+
+        if (isset($parameters['mail-header-image-url'])) {
+            if ($mail_header_image_url = Binput::get('mail-header-image-url', null, false, false)) {
+                $setting->set('mail-header-image-url', $mail_header_image_url);
+            } else {
+                $setting->delete('mail-header-image-url');
+            }
+        }
+
+        return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

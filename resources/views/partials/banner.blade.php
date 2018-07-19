@@ -7,9 +7,17 @@
         <div class="row app-banner-padding  @if(!$appBannerStyleFullWidth) app-banner @endif">
             <div class="col-md-12 text-center">
                 @if($appDomain)
-                <a href="{{ $appDomain }}" class="links"><img src="data:{{ $appBannerType }};base64, {{ $appBanner }}" class="banner-image img-responsive"></a>
+                    @if(Config::get('setting.header-image'))
+                    <a href="{{ $appDomain }}" class="links"><img src="{{ Config::get('setting.header-image') }}" class="banner-image img-responsive"></a>
+                    @else
+                    <a href="{{ $appDomain }}" class="links"><img src="data:{{ $appBannerType }};base64, {{ $appBanner }}" class="banner-image img-responsive"></a>
+                    @endif
                 @else
-                <img src="data:{{ $appBannerType }};base64, {{ $appBanner }}" class="banner-image img-responsive">
+                    @if(Config::get('setting.header-image'))
+                    <img src="{{ Config::get('setting.header-image') }}" class="banner-image img-responsive">
+                    @else
+                    <img src="data:{{ $appBannerType }};base64, {{ $appBanner }}" class="banner-image img-responsive">
+                    @endif
                 @endif
             </div>
         </div>

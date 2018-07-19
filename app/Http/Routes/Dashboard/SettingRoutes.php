@@ -95,6 +95,15 @@ class SettingRoutes
                 'as'   => 'post:dashboard.settings',
                 'uses' => 'SettingsController@postSettings',
             ]);
+
+            $router->get('extra', [
+                'as'   => 'get:dashboard.settings.extra',
+                'uses' => 'SettingsController@showExtraView',
+            ]);
+            $router->post('extra', [
+                'as'   => 'post:dashboard.settings.extra',
+                'uses' => 'SettingsController@postExtraSettings',
+            ]);
         });
     }
 }
