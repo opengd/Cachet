@@ -6,7 +6,10 @@
 @component('mail::button', ['url' => $actionUrl])
 {{ $actionText }}
 @endcomponent
-<img class="line" alt="Linje" height="6" src="EN LINJE" width="125" />
+
+@if(Config::get('setting.mail-thanks-image-url')) 
+<img class="line" alt="Linje" height="6" src="{{ Config::get('setting.mail-thanks-image-url') }}" width="125" />
+@endif
 
 <p class="brg">Best regards,<br>
 {{ Config::get('setting.app_name') }}</p>

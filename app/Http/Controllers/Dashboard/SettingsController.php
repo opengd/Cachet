@@ -481,6 +481,14 @@ class SettingsController extends Controller
             }
         }
 
+        if (isset($parameters['mail-thanks-image-url'])) {
+            if ($mail_thanks_image_url = Binput::get('mail-thanks-image-url', null, false, false)) {
+                $setting->set('mail-thanks-image-url', $mail_thanks_image_url);
+            } else {
+                $setting->delete('mail-thanks-image-url');
+            }
+        }
+
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }
