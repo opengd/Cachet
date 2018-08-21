@@ -183,7 +183,11 @@ class Subscriber extends Model implements HasPresenter
      */
     public function routeNotificationForMail()
     {
-        return $this->email_notify ? $this->email : null;
+        if($this->getIsVerifiedAttribute()) {
+            return  $this->email_notify ? $this->email : null;
+        } else {
+            return $this->email;
+        }
     }
 
     /**
