@@ -22,7 +22,20 @@
                     @foreach($incidents as $incident)
                     <div class="row striped-list-item">
                         <div class="col-xs-6">
-                            <i class="{{ $incident->icon }}"></i> <strong>{{ $incident->name }}</strong> <span class="badge badge-info">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count()) }}</span>
+                            @if($incident->status == 1)
+                            <span class="label label-danger"><i class="ion ion-flag"></i>
+                            {{ trans('cachet.incidents.status')[1] }}</span>
+                            @elseif($incident->status == 2)
+                            <span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
+                            {{ trans('cachet.incidents.status')[2] }}</span>
+                            @elseif($incident->status == 3)
+                            <span class="label label-info"><i class="ion ion-eye"></i>
+                            {{ trans('cachet.incidents.status')[3] }}</span>
+                            @elseif($incident->status == 4)
+                            <span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
+                            {{ trans('cachet.incidents.status')[4] }}</span>
+                            @endif
+                            <strong>{{ $incident->name }}</strong> <span class="badge badge-info">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count()) }}</span>
                             @if($incident->message)
                             <p>{{ Str::words($incident->message, 5) }}</p>
                             @endif
@@ -30,7 +43,8 @@
                             <p><span><a href="{{ $incident->ticket }}" target="_blank">{{ basename(parse_url($incident->ticket, PHP_URL_PATH)) }}</a></span></p>
                             @elseif($incident->ticket)
                             <p><span>{{ Str::words($incident->ticket)}}</span></p>
-                            @endif
+                            @endif                     
+
                             @if ($incident->user)
                             <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }}</small></p>
                             @endif
