@@ -56,6 +56,33 @@ class TemplateRoutes
                 'uses' => 'IncidentTemplateController@createIncidentTemplateAction',
             ]);
 
+            $router->get('update', [
+                'as'   => 'get:dashboard.templates.update',
+                'uses' => 'IncidentTemplateController@showUpdateTemplates',
+            ]);
+
+            $router->get('update/create', [
+                'as'   => 'get:dashboard.templates.update.create',
+                'uses' => 'IncidentTemplateController@showAddIncidentUpdateTemplate',
+            ]);
+            $router->post('update/create', [
+                'as'   => 'post:dashboard.templates.update.create',
+                'uses' => 'IncidentTemplateController@createIncidentUpdateTemplateAction',
+            ]);
+
+            $router->get('update/{incident_update_template}', [
+                'as'   => 'get:dashboard.templates.update.edit',
+                'uses' => 'IncidentTemplateController@showEditIncidentUpdateTemplateAction',
+            ]);
+            $router->post('update/{incident_update_template}', [
+                'as'   => 'post:dashboard.templates.update.edit',
+                'uses' => 'IncidentTemplateController@editIncidentUpdateTemplateAction',
+            ]);
+            $router->delete('update/{incident_update_template}', [
+                'as'   => 'delete:dashboard.templates.update.delete',
+                'uses' => 'IncidentTemplateController@deleteIncidentUpdateTemplateAction',
+            ]);
+
             $router->get('{incident_template}', [
                 'as'   => 'get:dashboard.templates.edit',
                 'uses' => 'IncidentTemplateController@showEditTemplateAction',
@@ -68,6 +95,7 @@ class TemplateRoutes
                 'as'   => 'delete:dashboard.templates.delete',
                 'uses' => 'IncidentTemplateController@deleteTemplateAction',
             ]);
+
         });
     }
 }

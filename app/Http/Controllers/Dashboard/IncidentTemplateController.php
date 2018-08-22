@@ -15,6 +15,7 @@ use AltThree\Validator\ValidationException;
 use CachetHQ\Cachet\Integrations\Contracts\System;
 use CachetHQ\Cachet\Models\Incident;
 use CachetHQ\Cachet\Models\IncidentTemplate;
+use CachetHQ\Cachet\Models\IncidentUpdateTemplate;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\Controller;
@@ -60,7 +61,27 @@ class IncidentTemplateController extends Controller
         $this->auth = $auth;
         $this->system = $system;
 
-        View::share('sub_title', trans('dashboard.incidents.title'));
+        //View::share('sub_title', trans('dashboard.incidents.title'));
+
+        $this->subMenu = [
+            'incidents' => [
+                'title'  => trans('dashboard.incidents.templates.name'),
+                'url'    => cachet_route('dashboard.templates'),
+                'icon'   => '',
+                'active' => false,
+            ],
+            'incidents_updates' => [
+                'title'  => trans('dashboard.incidents.templates.update.name'),
+                'url'    => cachet_route('dashboard.templates.update'),
+                'icon'   => '',
+                'active' => false,
+            ],
+        ];
+        
+        View::share([
+            'subMenu'  => $this->subMenu,
+            'subTitle' =>trans('dashboard.incidents.templates.templates'),
+        ]);
     }
 
     /**
@@ -70,6 +91,8 @@ class IncidentTemplateController extends Controller
      */
     public function showTemplates()
     {
+        $this->subMenu['incidents']['active'] = true;
+
         return View::make('dashboard.templates.index')
             ->withPageTitle(trans('dashboard.incidents.templates.title').' - '.trans('dashboard.dashboard'))
             ->withIncidentTemplates(IncidentTemplate::all());
@@ -156,6 +179,110 @@ class IncidentTemplateController extends Controller
         }
 
         return cachet_redirect('dashboard.templates.edit', ['id' => $template->id])
+            ->withUpdatedTemplate($template);
+    }
+
+    /**
+     * Shows the incident update templates.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showUpdateTemplates()
+    {
+        $this->subMenu['incidents_updates']['active'] = true;
+
+        return View::make('dashboard.templates.update.index')
+            ->withPageTitle(trans('dashboard.incidents.templates.update.title').' - '.trans('dashboard.dashboard'))
+            ->withIncidentUpdateTemplates(IncidentUpdateTemplate::all());
+    }
+
+    /**
+     * Shows the add incident update template view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showAddIncidentUpdateTemplate()
+    {
+        return View::make('dashboard.templates.update.add')
+            ->withPageTitle(trans('dashboard.incidents.templates.update.add.title').' - '.trans('dashboard.dashboard'));
+    }
+
+    /**
+     * Shows the edit incident update template view.
+     *
+     * @param int $template_id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showEditIncidentUpdateTemplateAction(int $template_id)
+    {
+        $template = IncidentUpdateTemplate::find($template_id);
+
+        error_log(json_encode($template));
+        return View::make('dashboard.templates.update.edit')
+            ->withPageTitle(trans('dashboard.incidents.templates.update.edit.title').' - '.trans('dashboard.dashboard'))
+            ->withTemplate($template);
+    }
+
+    /**
+     * Deletes an incident update template.
+     *
+     * @param int $template_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteIncidentUpdateTemplateAction(int $template_id)
+    {
+        $template = IncidentUpdateTemplate::find($template_id);
+
+        $template->delete();
+
+        return cachet_redirect('dashboard.templates.update')
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.incidents.templates.update.delete.success')));
+    }
+
+    /**
+     * Creates a new incident update template.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createIncidentUpdateTemplateAction()
+    {
+        try {
+            IncidentUpdateTemplate::create([
+                'name'     => Binput::get('name'),
+                'template' => Binput::get('template', null, false, false),
+            ]);
+        } catch (ValidationException $e) {
+            return cachet_redirect('dashboard.templates.update.create')
+                ->withInput(Binput::all())
+                ->withTitle(sprintf('%s %s', trans('dashboard.notifications.whoops'), trans('dashboard.incidents.templates.update.add.failure')))
+                ->withErrors($e->getMessageBag());
+        }
+
+        return cachet_redirect('dashboard.templates.update')
+            ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.incidents.templates.update.add.success')));
+    }
+
+    /**
+     * Edit an incident update template.
+     *
+     * @param int $template_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function editIncidentUpdateTemplateAction(int $template_id)
+    {
+        try {
+            $template = IncidentUpdateTemplate::find($template_id);
+            $template->update(Binput::get('template'));
+        } catch (ValidationException $e) {
+            return cachet_redirect('dashboard.templates.update.edit', ['id' => $template->id])
+                ->withUpdatedTemplate($template)
+                ->withTemplateErrors($e->getMessageBag()->getErrors());
+        }
+
+        return cachet_redirect('dashboard.templates.update.edit', ['id' => $template->id])
             ->withUpdatedTemplate($template);
     }
 }

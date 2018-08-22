@@ -54,7 +54,9 @@ return [
 
         // Incident templates
         'templates' => [
+            'templates' => 'Templates',
             'title' => 'Incident Templates',
+            'name' => 'Incident',
             'add'   => [
                 'title'   => 'Create an incident template',
                 'message' => 'Create your first incident template.',
@@ -70,6 +72,25 @@ return [
                 'success' => 'The incident template has been deleted.',
                 'failure' => 'The incident template could not be deleted, please try again.',
             ],
+            'update' => [
+                'title' => 'Incident Update Templates',
+                'name' => 'Incident Update',
+                'add'   => [
+                    'title'   => 'Create an incident update template',
+                    'message' => 'Create your first incident update template.',
+                    'success' => 'Your new incident update template has been created.',
+                    'failure' => 'Something went wrong with the incident update template.',
+                ],
+                'edit' => [
+                    'title'   => 'Edit Template',
+                    'success' => 'The incident update template has been updated.',
+                    'failure' => 'Something went wrong updating the incident update template',
+                ],
+                'delete' => [
+                    'success' => 'The incident update template has been deleted.',
+                    'failure' => 'The incident update template could not be deleted, please try again.',
+                ],
+            ]
         ],
     ],
 

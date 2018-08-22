@@ -32,7 +32,7 @@
             <li {!! set_active('dashboard/templates*') !!}>
                 <a href="{{ cachet_route('dashboard.templates') }}">
                     <i class="ion ion-ios-paper-outline"></i>
-                    <span>{{ trans('dashboard.incidents.incident-templates') }}</span>
+                    <span>{{ trans('dashboard.incidents.templates.templates') }}</span>
                     <span class="label label-info">{{ $incidentTemplateCount }}</span>
                 </a>
             </li>
