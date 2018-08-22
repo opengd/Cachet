@@ -113,7 +113,7 @@
                         <div class="form-group">
                             <label>{{ trans('forms.incidents.message') }}</label>
                             <div class="markdown-control">
-                                <textarea name="message" class="form-control autosize" rows="5" required v-model="message">{{ Binput::old('message') }}</textarea>
+                                <textarea name="message" class="form-control autosize" rows="5" required id="message" v-model="message">{{ Binput::old('message') }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

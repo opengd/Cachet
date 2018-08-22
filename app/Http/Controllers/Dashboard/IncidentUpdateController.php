@@ -21,6 +21,7 @@ use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
+use CachetHQ\Cachet\Models\IncidentUpdateTemplate;
 
 /**
  * This is the incident update controller.
@@ -88,7 +89,8 @@ class IncidentUpdateController extends Controller
     {
         return View::make('dashboard.incidents.updates.add')
             ->withIncident($incident)
-            ->withNotificationsEnabled($this->system->canNotifySubscribers());
+            ->withNotificationsEnabled($this->system->canNotifySubscribers())
+            ->withIncidentUpdateTemplates(IncidentUpdateTemplate::all());
     }
 
     /**

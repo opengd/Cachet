@@ -46,6 +46,7 @@ class ApiRoutes
             $router->post('components/groups/order', 'ApiController@postUpdateComponentGroupOrder');
             $router->post('components/order', 'ApiController@postUpdateComponentOrder');
             $router->any('components/{component}', 'ApiController@postUpdateComponent');
+            $router->get('incidents/update/templates', 'ApiController@getIncidentUpdateTemplate');
         });
     }
 }

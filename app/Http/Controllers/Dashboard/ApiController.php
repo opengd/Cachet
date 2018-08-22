@@ -17,6 +17,7 @@ use CachetHQ\Cachet\Http\Controllers\Api\AbstractApiController;
 use CachetHQ\Cachet\Models\Component;
 use CachetHQ\Cachet\Models\ComponentGroup;
 use CachetHQ\Cachet\Models\IncidentTemplate;
+use CachetHQ\Cachet\Models\IncidentUpdateTemplate;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -128,5 +129,23 @@ class ApiController extends AbstractApiController
         }
 
         throw new ModelNotFoundException("Incident template for $templateSlug could not be found.");
+    }
+
+        /**
+     * Returns a template by slug.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \CachetHQ\Cachet\Models\IncidentUpdateTemplate
+     */
+    public function getIncidentUpdateTemplate()
+    {
+        $templateSlug = Binput::get('slug');
+
+        if ($template = IncidentUpdateTemplate::where('slug', '=', $templateSlug)->first()) {
+            return $template;
+        }
+
+        throw new ModelNotFoundException("Incident update template for $templateSlug could not be found.");
     }
 }

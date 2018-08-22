@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
 @extends('layout.dashboard')
 
 @section('content')
@@ -10,7 +12,7 @@
     </span>
     &gt; <small>{{ trans('dashboard.incidents.updates.title', ['incident' => $incident->name]) }}</small> &gt; <small>{{ trans('dashboard.incidents.updates.add.title') }}</small>
 </div>
-<div class="content-wrapper">
+<div class="content-wrapper" id="hpdpdpd">
     <div class="row">
         <div class="col-md-12">
             @if(!$notificationsEnabled)
@@ -22,6 +24,17 @@
             <form class="form-vertical" name="IncidentUpdateForm" role="form" method="POST" autocomplete="off">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <fieldset>
+                    @if($incidentUpdateTemplates->count() > 0)
+                    <div class="form-group" id="gfg">
+                        <label for="incident-template">{{ trans('forms.incidents.templates.template') }}</label>
+                        <select class="form-control" name="template" onchange="onTemplateChange(this.value)">
+                            <option selected></option>
+                            @foreach($incidentUpdateTemplates as $tpl)
+                            <option value="{{ $tpl->slug }}">{{ $tpl->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
                     <div class="form-group">
                         <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                         <label class="radio-inline">
@@ -112,4 +125,19 @@
         </div>
     </div>
 </div>
+
+<script>
+function onTemplateChange(value) {
+    axios.get('/dashboard/api/incidents/update/templates', {
+        params: {
+            slug: value
+        }
+    }).then(response => {
+        $("[name='message']").val(response.data.template);
+    }).catch(response => {
+        (new Cachet.Notifier()).notify('There was an error finding that template.');
+    })
+}
+</script>
+
 @stop
