@@ -26,7 +26,16 @@
                 <a href="{{ cachet_route('dashboard.incidents') }}">
                     <i class="ion ion-ios-information-outline"></i>
                     <span>{{ trans('dashboard.incidents.incidents') }}</span>
-                    <span class="label label-info">{{ $incidentCount }}</span>
+                    @if($ongoingStatus == 1)
+                    <span class="label label-danger">
+                    @elseif($ongoingStatus == 2)
+                    <span class="label label-default" style="background-color: #f0ad4e;">
+                    @elseif($ongoingStatus == 3)
+                    <span class="label label-info" style="background-color: #3498db;">
+                    @else
+                    <span class="label label-info">
+                    @endif
+                    {{ $incidentCount }}</span>
                 </a>
             </li>
             <li {!! set_active('dashboard/templates*') !!}>

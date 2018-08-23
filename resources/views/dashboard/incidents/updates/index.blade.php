@@ -38,7 +38,7 @@
                         <strong>{{ Str::words($update->message, 8) }}</strong>
                         <p><small>{{ trans('cachet.incidents.posted', ['timestamp' => $update->created_at_diff]) }}</small></p>
 
-                        <p><small>&mdash; {{ trans('dashboard.incidents.updates.updated_by', ['user' => $update->user->username]) }} at {{ $update->created_at }}</small></p>
+                        <p><small>&mdash; {!! trans('dashboard.incidents.updates.updated_by', ['user' => $update->user->username, 'date' => $update->updated_at]) !!}</small></p>
                     </div>
                     <div class="col-xs-6 text-right">
                         <a href="{{ cachet_route('dashboard.incidents.updates.edit', ['incident' => $incident->id, 'incident_update' => $update]) }}" class="btn btn-default">

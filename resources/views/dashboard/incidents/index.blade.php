@@ -33,6 +33,9 @@
                             {{ trans('cachet.incidents.status')[3] }}</span>
                             @endif
                             <strong><a style="color: black" href="{{ cachet_route('dashboard.incidents.updates', [$incident->id]) }}">{{ $incident->name }}</a></strong> <span class="badge badge-info" style="background-color: #5bc0de;">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count(), ['count' => $incident->updates()->count()]) }}</span>
+                            @if ($incident->updates->count() > 0)
+                            <small>{!! trans('dashboard.incidents.updates.last_updated_by', ['user' => $incident->user->username, 'date' => $incident->updated_at]) !!}</small>
+                            @endif
                             @if($incident->message)
                             <p>{{ Str::words($incident->message, 5) }}</p>
                             @endif
@@ -43,8 +46,9 @@
                             @endif                     
 
                             @if ($incident->user)
-                            <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }} at {{ $incident->created_at }}</small></p>
+                            <p><small>&mdash; {!! trans('dashboard.incidents.reported_by', ['user' => $incident->user->username, 'date' => $incident->created_at]) !!}</small></p>
                             @endif
+
                         </div>
                         <div class="col-xs-6 text-right">
                             <a href="{{ cachet_route('dashboard.incidents.updates', [$incident->id]) }}" class="btn btn-info">{{ trans('forms.manage_updates') }}</a>
@@ -62,20 +66,14 @@
                     @foreach($fixedIncidents as $incident)
                     <div class="row striped-list-item">
                         <div class="col-xs-6">
-                            @if($incident->status == 1)
-                            <span class="label label-danger"><i class="ion ion-flag"></i>
-                            {{ trans('cachet.incidents.status')[1] }}</span>
-                            @elseif($incident->status == 2)
-                            <span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
-                            {{ trans('cachet.incidents.status')[2] }}</span>
-                            @elseif($incident->status == 3)
-                            <span class="label label-info"><i class="ion ion-eye"></i>
-                            {{ trans('cachet.incidents.status')[3] }}</span>
-                            @elseif($incident->status == 4)
+                            @if($incident->status == 4)
                             <span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
                             {{ trans('cachet.incidents.status')[4] }}</span>
                             @endif
                             <strong><a style="color: black" href="{{ cachet_route('dashboard.incidents.updates', [$incident->id]) }}">{{ $incident->name }}</a></strong> <span class="badge badge-info" style="background-color: #5bc0de;">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count(), ['count' => $incident->updates()->count()]) }}</span>
+                            @if ($incident->updates->count() > 0)
+                            <small>{!! trans('dashboard.incidents.updates.fixed_by', ['user' => $incident->user->username, 'date' => $incident->updated_at]) !!}</small>
+                            @endif
                             @if($incident->message)
                             <p>{{ Str::words($incident->message, 5) }}</p>
                             @endif
@@ -86,7 +84,7 @@
                             @endif                     
 
                             @if ($incident->user)
-                            <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }} at {{ $incident->created_at }}</small></p>
+                            <p><small>&mdash; {!! trans('dashboard.incidents.reported_by', ['user' => $incident->user->username, 'date' => $incident->created_at]) !!}</small></p>
                             @endif
                         </div>
                         <div class="col-xs-6 text-right">

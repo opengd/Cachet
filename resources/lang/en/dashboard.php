@@ -36,9 +36,11 @@ return [
                 'success' => 'The incident update has been updated.',
                 'failure' => 'Something went wrong updating the incident update',
             ],
-            'updated_by'    => 'Update by :user',
+            'updated_by'    => 'Update by <strong>:user</strong> at <i>:date</i>',
+            'last_updated_by'    => 'Last update at <i>:date</i>',
+            'fixed_by'    => 'Fixed at <i>:date</i>',
         ],
-        'reported_by'              => 'Reported by :user',
+        'reported_by'              => 'Reported by <strong>:user</strong> at <i>:date</i>',
         'ticket'                   => 'Ticket',
         'add'                      => [
             'title'   => 'Report an incident',
