@@ -46,7 +46,7 @@
                             @endif                     
 
                             @if ($incident->user)
-                            <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }}</small></p>
+                            <p><small>&mdash; {{ trans('dashboard.incidents.reported_by', ['user' => $incident->user->username]) }} at {{ $incident->created_at }}</small></p>
                             @endif
                         </div>
                         <div class="col-xs-6 text-right">

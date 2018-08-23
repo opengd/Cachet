@@ -6,17 +6,14 @@
         <i class="icon ion-navicon"></i>
     </div>
     <span class="uppercase">
-        <i class="ion ion-ios-information-outline"></i> {{ trans('dashboard.incidents.incidents') }}
+        <i class="ion ion-ios-information-outline"></i> <a href="{{ cachet_route('dashboard.incidents') }}">{{ trans('dashboard.incidents.incidents') }}</a>
     </span>
     &gt; <small>{{ trans('dashboard.incidents.updates.title', ['incident' => $incident->name]) }}</small>
+    <a class="btn btn-md btn-success pull-right" href="{{ cachet_route('dashboard.incidents.updates.create', [$incident->id]) }}">
+            {{ trans('dashboard.incidents.updates.add.title') }}
+    </a>
 </div>
 <div class="content-wrapper">
-    <div class="header sub-header">
-        <a class="btn btn-md btn-success pull-right" href="{{ cachet_route('dashboard.incidents.updates.create', [$incident->id]) }}">
-            {{ trans('dashboard.incidents.updates.add.title') }}
-        </a>
-        <div class="clearfix"></div>
-    </div>
     <div class="row">
         <div class="col-sm-12">
             @include('partials.errors')
@@ -25,8 +22,6 @@
                 @foreach($incident->updates as $update)
                 <div class="row striped-list-item">
                     <div class="col-xs-6">
-                        <strong>{{ Str::words($update->message, 8) }}</strong>
-                        <p><small>{{ trans('cachet.incidents.posted', ['timestamp' => $update->created_at_diff]) }}</small></p>
                         @if($update->status == 1)
                         <span class="label label-danger"><i class="ion ion-flag"></i>
                         {{ trans('cachet.incidents.status')[1] }}</span>
@@ -40,6 +35,10 @@
                         <span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
                         {{ trans('cachet.incidents.status')[4] }}</span>
                         @endif
+                        <strong>{{ Str::words($update->message, 8) }}</strong>
+                        <p><small>{{ trans('cachet.incidents.posted', ['timestamp' => $update->created_at_diff]) }}</small></p>
+
+                        <p><small>&mdash; {{ trans('dashboard.incidents.updates.updated_by', ['user' => $update->user->username]) }} at {{ $update->created_at }}</small></p>
                     </div>
                     <div class="col-xs-6 text-right">
                         <a href="{{ cachet_route('dashboard.incidents.updates.edit', ['incident' => $incident->id, 'incident_update' => $update]) }}" class="btn btn-default">

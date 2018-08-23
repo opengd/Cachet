@@ -34,6 +34,7 @@ return [
                 'success' => 'The incident update has been updated.',
                 'failure' => 'Something went wrong updating the incident update',
             ],
+            'updated_by'    => 'Update by :user',
         ],
         'reported_by'              => 'Reported by :user',
         'ticket'                   => 'Ticket',
