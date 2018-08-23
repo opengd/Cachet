@@ -35,7 +35,7 @@
                             <span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
                             {{ trans('cachet.incidents.status')[4] }}</span>
                             @endif
-                            <strong>{{ $incident->name }}</strong> <span class="badge badge-info">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count()) }}</span>
+                            <strong><a style="color: black" href="{{ cachet_route('dashboard.incidents.updates', [$incident->id]) }}">{{ $incident->name }}</a></strong> <span class="badge badge-info" style="background-color: #5bc0de;">{{ trans_choice('dashboard.incidents.updates.count', $incident->updates()->count(), ['count' => $incident->updates()->count()]) }}</span>
                             @if($incident->message)
                             <p>{{ Str::words($incident->message, 5) }}</p>
                             @endif
