@@ -18,7 +18,9 @@ return [
     'incidents' => [
         'title'                    => 'Incidents & Maintenance',
         'incidents'                => 'Incidents',
-        'logged'                   => '{0}There are no incidents, good work.|[1]You have logged one incident.|[2,*]You have reported <strong>:count</strong> incidents.',
+        'logged'                   => '{0}There are no incidents reported.|[1]You have logged one incident.|[2,*]You have reported <strong>:count</strong> incidents.',
+        'ongoing'                  => '{0}There are no ongoing incidents.|[1]You have <strong>1</strong> ongoing incident.|[2,*]You have <strong>:count</strong> ongoing incidents.',
+        'past'                     => '{0}There are no past incidents.|[1]You have <strong>1</strong> past incident.|[2,*]You have <strong>:count</strong> past incidents.',
         'incident-create-template' => 'Create Template',
         'incident-templates'       => 'Incident Templates',
         'updates'                  => [

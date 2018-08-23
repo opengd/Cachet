@@ -75,11 +75,14 @@ class IncidentController extends Controller
      */
     public function showIncidents()
     {
-        $incidents = Incident::orderBy('created_at', 'desc')->get();
+        $ongoing_incidents = Incident::where('status', '<', 4)->orderBy('created_at', 'desc')->get();
+        $fixed_incidents = Incident::where('status', '=', 4)->orderBy('created_at', 'desc')->get();
+        //$incidents = Incident::orderBy('created_at', 'desc')->get();
 
         return View::make('dashboard.incidents.index')
             ->withPageTitle(trans('dashboard.incidents.incidents').' - '.trans('dashboard.dashboard'))
-            ->withIncidents($incidents);
+            ->withFixedIncidents($fixed_incidents)
+            ->withOngoingIncidents($ongoing_incidents);
     }
 
     /**
