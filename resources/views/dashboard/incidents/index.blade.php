@@ -18,7 +18,7 @@
                 @include('partials.errors')
                 @if($ongoingIncidents->count() > 0)
                 <p class="lead">{!! trans_choice('dashboard.incidents.ongoing', $ongoingIncidents->count(), ['count' => $ongoingIncidents->count()]) !!}</p>
-                <div class="striped-list" style="margin-bottom: 2em;">
+                <div class="striped-list" style="margin-bottom: 3em;">
                 @foreach($ongoingIncidents as $incident)
                 <div class="row striped-list-item">
                         <div class="col-xs-6">
