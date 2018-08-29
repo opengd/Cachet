@@ -63,6 +63,11 @@ class StatusPageRoutes
                 'as'   => 'get:component_shield',
                 'uses' => 'StatusPageController@showComponentBadge',
             ]);
+
+            $router->get('test', [
+                'as'   => 'get:status-page-imported',
+                'uses' => 'StatusPageController@showIndexImported',
+            ]);
         });
     }
 }

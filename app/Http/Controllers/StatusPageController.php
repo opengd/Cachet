@@ -208,4 +208,97 @@ class StatusPageController extends AbstractApiController
 
         return Response::make($badge, 200, ['Content-Type' => 'image/svg+xml']);
     }
+
+    /**
+     * Shows status page as imported.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function showIndexImported()
+    {
+        $onlyDisruptedDays = Config::get('setting.only_disrupted_days');
+        $appIncidentDays = (int) Config::get('setting.app_incident_days', 1);
+
+        $startDate = Date::createFromFormat('Y-m-d', Binput::get('start_date', Date::now()->toDateString()));
+        $endDate = $startDate->copy()->subDays($appIncidentDays);
+
+        $canPageForward = false;
+        $canPageBackward = false;
+        $previousDate = null;
+        $nextDate = null;
+
+        if ($onlyDisruptedDays) {
+            // In this case, start_date GET parameter means the page
+            $page = (int) Binput::get('start_date', 0);
+
+            $allIncidentDays = Incident::where('visible', '>=', (int) !Auth::check())
+                                       ->select('updated_at')
+                                       ->whereBetween('updated_at', [
+                                           $endDate->format('Y-m-d').' 00:00:00',
+                                           $startDate->format('Y-m-d').' 23:59:59',
+                                       ])
+                                       ->distinct()
+                                       ->orderBy('updated_at', 'desc')
+                                       ->get()
+                                       ->map(function (Incident $incident) {
+                                           return app(DateFactory::class)->make($incident->updated_at)->toDateString();
+                                       })->unique()
+                                      ->values();
+
+            $numIncidentDays = count($allIncidentDays);
+            $numPages = round($numIncidentDays / $appIncidentDays);
+
+            $selectedDays = $allIncidentDays->slice($page * $appIncidentDays, $appIncidentDays)->all();
+
+            if (count($selectedDays) > 0) {
+                $startDate = Date::createFromFormat('Y-m-d', array_values($selectedDays)[0]);
+                $endDate = Date::createFromFormat('Y-m-d', array_values(array_slice($selectedDays, -1))[0]);
+            }
+
+            $canPageForward = $page > 0;
+            $canPageBackward = ($page + 1) < $numPages;
+            $previousDate = $page + 1;
+            $nextDate = $page - 1;
+        } else {
+            $date = Date::now();
+
+            $canPageForward = (bool) $startDate->lt($date->sub('1 day'));
+            $canPageBackward = Incident::where('updated_at', '<', $date->format('Y-m-d'))->count() > 0;
+            $previousDate = $startDate->copy()->subDays($appIncidentDays)->toDateString();
+            $nextDate = $startDate->copy()->addDays($appIncidentDays)->toDateString();
+        }
+
+        $allIncidents = Incident::where('visible', '>=', (int) !Auth::check())->whereBetween('updated_at', [
+            $endDate->format('Y-m-d').' 00:00:00',
+            $startDate->format('Y-m-d').' 23:59:59',
+        ])->orderBy('updated_at', 'desc')->get()->groupBy(function (Incident $incident) {
+            return app(DateFactory::class)->make($incident->updated_at)->toDateString();
+        });
+
+        if (!$onlyDisruptedDays) {
+            $incidentDays = array_pad([], $appIncidentDays, null);
+
+            // Add in days that have no incidents
+            foreach ($incidentDays as $i => $day) {
+                $date = app(DateFactory::class)->make($startDate)->subDays($i);
+
+                if (!isset($allIncidents[$date->toDateString()])) {
+                    $allIncidents[$date->toDateString()] = [];
+                }
+            }
+        }
+
+        // Sort the array so it takes into account the added days
+        $allIncidents = $allIncidents->sortBy(function ($value, $key) {
+            return strtotime($key);
+        }, SORT_REGULAR, true);
+
+        return View::make('imported')
+            ->withDaysToShow($appIncidentDays)
+            ->withAllIncidents($allIncidents)
+            ->withCanPageForward($canPageForward)
+            ->withCanPageBackward($canPageBackward)
+            ->withPreviousDate($previousDate)
+            ->withNextDate($nextDate);
+    }
 }
