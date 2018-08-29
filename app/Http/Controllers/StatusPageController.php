@@ -60,16 +60,16 @@ class StatusPageController extends AbstractApiController
             $page = (int) Binput::get('start_date', 0);
 
             $allIncidentDays = Incident::where('visible', '>=', (int) !Auth::check())
-                                       ->select('occurred_at')
-                                       ->whereBetween('occurred_at', [
+                                       ->select('updated_at')
+                                       ->whereBetween('updated_at', [
                                            $endDate->format('Y-m-d').' 00:00:00',
                                            $startDate->format('Y-m-d').' 23:59:59',
                                        ])
                                        ->distinct()
-                                       ->orderBy('occurred_at', 'desc')
+                                       ->orderBy('updated_at', 'desc')
                                        ->get()
                                        ->map(function (Incident $incident) {
-                                           return app(DateFactory::class)->make($incident->occurred_at)->toDateString();
+                                           return app(DateFactory::class)->make($incident->updated_at)->toDateString();
                                        })->unique()
                                       ->values();
 
@@ -91,16 +91,16 @@ class StatusPageController extends AbstractApiController
             $date = Date::now();
 
             $canPageForward = (bool) $startDate->lt($date->sub('1 day'));
-            $canPageBackward = Incident::where('occurred_at', '<', $date->format('Y-m-d'))->count() > 0;
+            $canPageBackward = Incident::where('updated_at', '<', $date->format('Y-m-d'))->count() > 0;
             $previousDate = $startDate->copy()->subDays($appIncidentDays)->toDateString();
             $nextDate = $startDate->copy()->addDays($appIncidentDays)->toDateString();
         }
 
-        $allIncidents = Incident::where('visible', '>=', (int) !Auth::check())->whereBetween('occurred_at', [
+        $allIncidents = Incident::where('visible', '>=', (int) !Auth::check())->whereBetween('updated_at', [
             $endDate->format('Y-m-d').' 00:00:00',
             $startDate->format('Y-m-d').' 23:59:59',
-        ])->orderBy('occurred_at', 'desc')->get()->groupBy(function (Incident $incident) {
-            return app(DateFactory::class)->make($incident->occurred_at)->toDateString();
+        ])->orderBy('updated_at', 'desc')->get()->groupBy(function (Incident $incident) {
+            return app(DateFactory::class)->make($incident->updated_at)->toDateString();
         });
 
         if (!$onlyDisruptedDays) {
