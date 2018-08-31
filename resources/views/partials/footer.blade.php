@@ -4,11 +4,6 @@
 <footer class="footer" style="height: 150px">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12" style="text-align: center;">
-                <h4>{{ trans('cachet.get_subscribe') }}</h4>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-sm-12">
                 <ul class="list-inline" style="text-align: center;">
                     @if($showSupport)
@@ -35,6 +30,11 @@
                     </li>
                     @endif
                 </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center;">
+                <h4>{{ trans('cachet.get_subscribe') }}</h4>
             </div>
         </div>
     </div>
