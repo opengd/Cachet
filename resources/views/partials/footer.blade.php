@@ -1,7 +1,7 @@
 @if($appFooter)
 {!! $appFooter !!}
 @else
-<footer class="footer" style="height: 150px">
+<footer class="footer" style="height: 135px">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
