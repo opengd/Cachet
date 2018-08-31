@@ -1,14 +1,16 @@
 @if($appFooter)
 {!! $appFooter !!}
 @else
-<footer class="footer">
+<footer class="footer" style="height: 150px">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12" style="text-align: center;">
                 <h4>{{ trans('cachet.get_subscribe') }}</h4>
             </div>
-            <div class="col-sm-4">
-                <ul class="list-inline">
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="list-inline" style="text-align: center;">
                     @if($showSupport)
                     <p>
                         {!! trans('cachet.powered_by') !!}
