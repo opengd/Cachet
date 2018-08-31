@@ -51,6 +51,8 @@
     @endif
     <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.6.1/iframeResizer.contentWindow.min.js"></script>
+
     @include('partials.stylesheet')
 
     @include('partials.crowdin')
