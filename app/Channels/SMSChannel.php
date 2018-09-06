@@ -4,6 +4,7 @@ namespace CachetHQ\Cachet\Channels;
 
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
 
 class SMSChannel
 {
@@ -21,19 +22,18 @@ class SMSChannel
         }
 
         $message = $notification->toSMS($notifiable);
-   
-        $request = \Illuminate\Http\Request::create(config('sms.url'), 
-            'GET', [
-                    'username' => config('sms.username'), 
-                    'password' => config('sms.password'), 
-                    'from' => config('sms.from'), 
-                    'to'=> $to, 
-                    'text' => $message->content
-                ]);
-        
 
-        //Log::error($this->email . ":sendCreateIncidentSMSDirect: " . $incident->name);
+        $client = new Client();
+        $res = $client->request('GET', config('sms.url'), [
+        'query' => [
+                'username' => config('sms.username'),
+                'password' => config('sms.password'),
+                'from' => config('sms.from'),
+                'to'=> $to,
+                'text' => $message->content
+        ]
+        ]);
 
-        Log::error($to . ":Send SMS:" . $message->content . "#####" . serialize($request));
+        Log::info($to . ":Send SMS:" . $message->content . ":Response:" . serialize($res));
     }
 }
