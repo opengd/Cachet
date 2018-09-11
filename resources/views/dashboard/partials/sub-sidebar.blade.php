@@ -1,4 +1,4 @@
-<div class="sub-sidebar">
+<div class="sub-sidebar" style="padding-top: {{ Config::get('setting.disable_notifications') ? 35 : 0 }}px;">
     <div class="sidebar-toggler visible-xs">
         <i class="ion ion-navicon"></i>
     </div>

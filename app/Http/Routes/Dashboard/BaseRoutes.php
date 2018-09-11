@@ -48,6 +48,11 @@ class BaseRoutes
                     'as'   => 'get:dashboard',
                     'uses' => 'DashboardController@showDashboard',
                 ]);
+
+                $router->post('dashboardsettings', [
+                    'as'   => 'post:dashboard.dashboardsettings',
+                    'uses' => 'DashboardController@postDashboardSettings',
+                ]);
             });
         });
     }

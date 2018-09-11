@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Jenssegers\Date\Date;
+use CachetHQ\Cachet\Settings\Repository;
+use Illuminate\Support\Facades\Redirect;
+use GrahamCampbell\Binput\Facades\Binput;
 
 /**
  * This is the dashboard controller class.
@@ -200,5 +203,27 @@ class DashboardController extends Controller
 
         return $componentGroupsBuilder->used($usedComponentGroups)
             ->get();
+    }
+
+    /**
+     * Updates the dashboard status page settings.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function postDashboardSettings()
+    {
+        $setting = app(Repository::class);
+
+        if (Binput::get('disable_notifications') === '1') {
+            if ($notifications = Binput::get('disable_notifications', null, false, false)) {
+                $setting->set('disable_notifications', $notifications);
+            } else {
+                $setting->delete('disable_notifications');
+            }
+        } else {
+            $setting->delete('disable_notifications');
+        }
+        
+        return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

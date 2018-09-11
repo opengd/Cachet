@@ -41,7 +41,14 @@
 </head>
 
 <body class="dashboard">
-    <div class="wrapper" id="app">
+    @if(Config::get('setting.disable_notifications'))
+    <div class="row" style="background-color: red; position: fixed; top: 0; left: 0; z-index: 999; height: 35px; width: 100%;">
+        <div class="col-sm-12">
+            <h4 style="color: white; text-align: center;">{{ trans('dashboard.notifications_disabled') }}</h4>
+        </div>
+    </div>
+    @endif
+    <div class="wrapper" id="app" style="padding-top: {{ Config::get('setting.disable_notifications') ? 35 : 0 }}px;">
         @include('dashboard.partials.sidebar')
         <div class="page-content">
             @if(!$isWriteable)

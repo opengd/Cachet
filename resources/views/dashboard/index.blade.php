@@ -17,6 +17,34 @@
                     <div class="alert alert-info hidden" id="update-alert">{!! trans('cachet.system.update') !!}</div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @include('partials.errors')
+                </div>
+                <div class="col-md-12">
+                    <div class="stats-widget">
+                        <form id="settings-form" name="SettingsForm" class="form-vertical" role="form" action="{{ cachet_route('dashboard.dashboardsettings', [], 'post') }}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <fieldset>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" value="0" name="disable_notifications">
+                                        <input type="checkbox" value="1" name="disable_notifications" {{ Config::get('setting.disable_notifications') ? 'checked' : null }}>
+                                        {{ trans('forms.settings.dashboard.notifications') }}
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">{{ trans('forms.save') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
               <div class="col-md-12">

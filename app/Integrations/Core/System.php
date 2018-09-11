@@ -111,6 +111,10 @@ class System implements SystemContract
      */
     public function canNotifySubscribers()
     {
+        if($this->config->get('setting.disable_notifications')) {
+            return false;
+        }
+
         $maintenancePeriods = Schedule::inProgress()->count();
         if ($maintenancePeriods === 0) {
             return true;
