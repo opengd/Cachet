@@ -20,6 +20,8 @@ use CachetHQ\Cachet\Models\Schedule;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\View;
+use CachetHQ\Cachet\Integrations\Contracts\System;
+use Illuminate\Contracts\Auth\Guard;
 
 /**
  * This is the schedule controller class.
@@ -36,12 +38,21 @@ class ScheduleController extends Controller
     protected $subMenu = [];
 
     /**
+     * The system instance.
+     *
+     * @var \CachetHQ\Cachet\Integrations\Contracts\System
+     */
+    protected $system;
+
+    /**
      * Creates a new schedule controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Guard $auth, System $system)
     {
+        $this->system = $system;
+
         View::share('subTitle', trans('dashboard.schedule.title'));
     }
 
@@ -70,6 +81,7 @@ class ScheduleController extends Controller
 
         return View::make('dashboard.maintenance.add')
             ->withPageTitle(trans('dashboard.schedule.add.title').' - '.trans('dashboard.dashboard'))
+            ->withNotificationsEnabled($this->system->canNotifySubscribers())
             ->withIncidentTemplates($incidentTemplates);
     }
 
@@ -87,7 +99,8 @@ class ScheduleController extends Controller
                 Binput::get('status', Schedule::UPCOMING),
                 Binput::get('scheduled_at'),
                 Binput::get('completed_at'),
-                Binput::get('components', [])
+                Binput::get('components', []),
+                Binput::get('notify')
             ));
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.schedule.create')

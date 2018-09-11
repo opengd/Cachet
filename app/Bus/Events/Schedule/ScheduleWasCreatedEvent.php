@@ -37,6 +37,13 @@ final class ScheduleWasCreatedEvent implements ActionInterface, ScheduleEventInt
     public $schedule;
 
     /**
+     * Whether to notify that the incident was reported.
+     *
+     * @var bool
+     */
+    public $notify;
+
+    /**
      * Create a new schedule was created event instance.
      *
      * @param \CachetHQ\Cachet\Models\User     $user
@@ -44,10 +51,11 @@ final class ScheduleWasCreatedEvent implements ActionInterface, ScheduleEventInt
      *
      * @return void
      */
-    public function __construct(User $user, Schedule $schedule)
+    public function __construct(User $user, Schedule $schedule, $notify)
     {
         $this->user = $user;
         $this->schedule = $schedule;
+        $this->notify = $notify;
     }
 
     /**

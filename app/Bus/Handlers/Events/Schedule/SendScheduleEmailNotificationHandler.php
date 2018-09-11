@@ -12,6 +12,7 @@
 namespace CachetHQ\Cachet\Bus\Handlers\Events\Schedule;
 
 use CachetHQ\Cachet\Bus\Events\Schedule\ScheduleEventInterface;
+use CachetHQ\Cachet\Integrations\Contracts\System;
 use CachetHQ\Cachet\Models\Subscriber;
 use CachetHQ\Cachet\Notifications\Schedule\NewScheduleNotification;
 
@@ -32,12 +33,14 @@ class SendScheduleEmailNotificationHandler
     /**
      * Create a new send schedule email notification handler.
      *
+     * @param \CachetHQ\Cachet\Integrations\Contracts\System $system
      * @param \CachetHQ\Cachet\Models\Subscriber $subscriber
      *
      * @return void
      */
-    public function __construct(Subscriber $subscriber)
+    public function __construct(System $system, Subscriber $subscriber)
     {
+        $this->system = $system;
         $this->subscriber = $subscriber;
     }
 
@@ -50,6 +53,10 @@ class SendScheduleEmailNotificationHandler
      */
     public function handle(ScheduleEventInterface $event)
     {
+        if (!$event->notify || !$this->system->canNotifySubscribers()) {
+            return false;
+        }
+
         $schedule = $event->schedule;
 
         // First notify all global subscribers.
