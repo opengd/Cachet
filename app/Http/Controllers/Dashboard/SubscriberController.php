@@ -25,6 +25,9 @@ use Illuminate\Support\MessageBag;
 use CachetHQ\Cachet\Models\Component;
 use CachetHQ\Cachet\Models\ComponentGroup;
 use CachetHQ\Cachet\Models\Subscription;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Config;
 
 class SubscriberController extends Controller
 {
@@ -300,5 +303,35 @@ class SubscriberController extends Controller
 
         return cachet_redirect('dashboard.subscribers.sms')
             ->withSuccess(sprintf('%s %s', trans('dashboard.notifications.awesome'), trans('dashboard.subscribers.sms.edit.success')));
+    }
+
+    /**
+     * Send test SMS to subscriber.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendTestSMSToSubscriberAction(Subscriber $subscriber)
+    {
+        if (! ($to = $subscriber->routeNotificationFor('sms'))) {
+            return cachet_redirect('dashboard.subscribers.sms.edit', ['id' => $subscriber->id])
+            ->withTitle(sprintf('%s', trans('notifications.subscriber.sms.test.failure')))
+            ->withErrors("No SMS number");
+        }
+
+        $client = new Client();
+        $res = $client->request('GET', config('sms.url'), [
+        'query' => [
+                'username' => config('sms.username'),
+                'password' => config('sms.password'),
+                'from' => config('sms.from'),
+                'to'=> $to,
+                'text' => Config::get('setting.sms-test-message') ? Config::get('setting.sms-test-message') : trans('notifications.subscriber.sms.test.content')
+        ]
+        ]);
+
+        return cachet_redirect('dashboard.subscribers.sms.edit', ['id' => $subscriber->id])
+            ->withSuccess(sprintf('%s', trans('notifications.subscriber.sms.test.success')));
+
+        Log::info($to . ":Send SMS:" . $message->content . ":Response:" . serialize($res));
     }
 }

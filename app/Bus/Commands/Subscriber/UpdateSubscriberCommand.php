@@ -96,7 +96,7 @@ final class UpdateSubscriberCommand
     {
         $this->subscriber = $subscriber;
         $this->email = $email;
-        $this->sms_number = $sms_number;
+        $this->sms_number = empty($sms_number) ? null : $sms_number;
         $this->verified = $verified;
         $this->email_notify = $email_notify;
         $this->sms_notify = $sms_notify;

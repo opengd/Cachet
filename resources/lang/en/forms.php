@@ -210,7 +210,8 @@ return [
             'banner-image'            => 'Banner image URL',
             'mail-header-image'       => 'Mail header image URL',
             'mail-thanks-image'       => 'Mail thanks image URL',
-            'mail-thanks-from'        => 'Mail thanks from'
+            'mail-thanks-from'        => 'Mail thanks from',
+            'sms-test-message'        => 'SMS test message content (if empty default message will be used)'
         ],
         'dashboard' => [
             'notifications'           => 'Disable all notifications, if this is set you will not be able to notify subscribers.'
@@ -237,6 +238,12 @@ return [
             'email'       => 'Your Team Members Email Address',
         ],
         'sms_number'    => 'SMS number'
+    ],
+
+    'subscribers' => [
+        "sms" => [
+            "test" => "Send Test SMS"
+        ]
     ],
 
     'general' => [

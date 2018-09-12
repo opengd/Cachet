@@ -497,6 +497,14 @@ class SettingsController extends Controller
             }
         }
 
+        if (isset($parameters['sms-test-message'])) {
+            if ($sms_test_message = Binput::get('sms-test-message', null, false, false)) {
+                $setting->set('sms-test-message', $sms_test_message);
+            } else {
+                $setting->delete('sms-test-message');
+            }
+        }
+
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

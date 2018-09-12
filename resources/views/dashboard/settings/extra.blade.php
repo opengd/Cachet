@@ -47,6 +47,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>{{ trans('forms.settings.extra.sms-test-message') }}</label>
+                                    <input type="text" class="form-control" name="sms-test-message" value="{{ Config::get('setting.sms-test-message') }}" placeholder="{{ trans('notifications.subscriber.sms.test.content') }}">
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
 
                     <div class="row">

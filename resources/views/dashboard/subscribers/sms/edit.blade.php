@@ -26,7 +26,9 @@
                 <label for="sms-number">{{ trans('forms.user.sms_number') }}</label>
                 <input type="text" class="form-control" name="sms-number" id="sms-number" value="{{$subscriber->sms_number}}" placeholder="{{ trans('forms.user.sms_number') }}">
             </div>
-
+            <div class="form-group">
+                <a href="{{ cachet_route('dashboard.subscribers.sms.test', [$subscriber->id]) }}" class="btn btn-info">{{ trans('forms.subscribers.sms.test') }}</a>
+            </div>
             <input type="hidden" name="sms-notify" value="0">
             <div class="form-group">
                 <label for="sms-notify">{{ trans('dashboard.subscribers.sms.edit.notify') }}</label>

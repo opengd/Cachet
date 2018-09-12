@@ -86,6 +86,13 @@ return [
                 'action'  => 'Verify',
             ],
         ],
+        'sms' => [
+            'test' => [
+                'content' => "Test SMS message.",
+                "success" => "Test SMS was sent to subscriber.",
+                "failure" => "Unabled to send SMS to subscriber."
+            ]
+        ]
     ],
     'system' => [
         'test' => [

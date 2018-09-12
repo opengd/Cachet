@@ -71,7 +71,7 @@ class UpdateSubscriberCommandHandler
     {
         $params = [
             'email'         => $command->email,
-            'sms_number'    => $command->sms_number,
+            'sms_number'    => empty($command->sms_number) ? null : $command->sms_number,
             'sms_notify'    => $command->sms_notify,
             'email_notify'  => $command->email_notify
             //'subscriptions'    => $command->subscriptions,

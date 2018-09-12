@@ -74,6 +74,10 @@ class SubscriberRoutes
                 'as'   => 'post:dashboard.subscribers.sms.add',
                 'uses' => 'SubscriberController@createSMSSubscriberAction',
             ]);
+            $router->get('{subscriber}/sms/test', [
+                'as'   => 'get:dashboard.subscribers.sms.test',
+                'uses' => 'SubscriberController@sendTestSMSToSubscriberAction',
+            ]);
 
             $router->delete('{subscriber}/delete/sms', [
                 'as'   => 'delete:dashboard.subscribers.delete_sms',
