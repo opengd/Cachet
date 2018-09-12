@@ -28,6 +28,7 @@ use CachetHQ\Cachet\Models\Subscription;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
+use CachetHQ\Cachet\Notifications\Subscriber\VerifySubscriptionNotification;
 
 class SubscriberController extends Controller
 {
@@ -333,5 +334,18 @@ class SubscriberController extends Controller
             ->withSuccess(sprintf('%s', trans('notifications.subscriber.sms.test.success')));
 
         Log::info($to . ":Send SMS:" . $message->content . ":Response:" . serialize($res));
+    }
+
+    /**
+     * Send test SMS to subscriber.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resendVerifyEmail(Subscriber $subscriber)
+    {
+        $subscriber->notify(new VerifySubscriptionNotification());
+
+        return cachet_redirect('dashboard.subscribers.edit', ['id' => $subscriber->id])
+            ->withSuccess(sprintf('%s', trans('dashboard.subscribers.edit.resend_verify_success')));
     }
 }

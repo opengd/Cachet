@@ -209,7 +209,8 @@ return [
             ],
             'verified'  => 'Email verified',
             'notify'    => 'Notify subscriber by email',
-            'components'    => 'Component subscriptions'
+            'components'    => 'Component subscriptions',
+            'resend_verify_success' => 'Verify email has been sent to subscriber.'
         ],
         'sms' => [
             'subscriber'   => 'Subscriber',

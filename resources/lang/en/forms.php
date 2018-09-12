@@ -244,7 +244,8 @@ return [
     'subscribers' => [
         "sms" => [
             "test" => "Send Test SMS"
-        ]
+        ],
+        'resendverify' => "Resend Verify Email"
     ],
 
     'general' => [

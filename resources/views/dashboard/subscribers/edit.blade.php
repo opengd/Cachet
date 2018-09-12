@@ -28,6 +28,10 @@
                 <p><input name="verified" type="checkbox" value="1" {{ $subscriber->getIsVerifiedAttribute() ? "checked" : "" }}></p>
             </div>
 
+            <div class="form-group">
+                <a href="{{ cachet_route('dashboard.subscribers.resendverify', [$subscriber->id]) }}" class="btn btn-info">{{ trans('forms.subscribers.resendverify') }}</a>
+            </div>
+
             @if($componentGroups->isNotEmpty() || $ungroupedComponents->isNotEmpty())
             <label>{{ trans('dashboard.subscribers.edit.components') }}</label>
             @foreach($componentGroups as $componentGroup)

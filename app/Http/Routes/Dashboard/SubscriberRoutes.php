@@ -79,6 +79,11 @@ class SubscriberRoutes
                 'uses' => 'SubscriberController@sendTestSMSToSubscriberAction',
             ]);
 
+            $router->get('{subscriber}/resendverify', [
+                'as'   => 'get:dashboard.subscribers.resendverify',
+                'uses' => 'SubscriberController@resendVerifyEmail',
+            ]);
+
             $router->delete('{subscriber}/delete/sms', [
                 'as'   => 'delete:dashboard.subscribers.delete_sms',
                 'uses' => 'SubscriberController@deleteSMSSubscriberAction',
