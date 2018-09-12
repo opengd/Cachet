@@ -339,9 +339,9 @@ class SettingsController extends Controller
      */
     public function showExtraView()
     {
-        $this->subMenu['theme']['active'] = true;
+        $this->subMenu['extra']['active'] = true;
 
-        Session::flash('redirect_to', $this->subMenu['theme']['url']);
+        Session::flash('redirect_to', $this->subMenu['extra']['url']);
 
         return View::make('dashboard.settings.extra')
             ->withPageTitle(trans('dashboard.settings.extra.extra').' - '.trans('dashboard.dashboard'))
