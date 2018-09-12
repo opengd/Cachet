@@ -209,8 +209,8 @@ return [
         'extra' => [
             'banner-image'            => 'Banner image URL',
             'mail-header-image'       => 'Mail header image URL',
-            'mail-thanks-image'       => 'Mail thanks image URL',
-            'mail-thanks-from'        => 'Mail thanks from',
+            'mail-thanks-image'       => 'Mail signature image URL',
+            'mail-thanks-from'        => 'Mail signature from',
             'sms-test-message'        => 'SMS test message content (if empty default message will be used)',
             'use-status-labels'       => 'Use status labels instead of symbols on Status Page'
         ],

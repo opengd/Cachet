@@ -210,7 +210,7 @@ return [
             'verified'  => 'Email verified',
             'notify'    => 'Notify subscriber by email',
             'components'    => 'Component subscriptions',
-            'resend_verify_success' => 'Verify email has been sent to subscriber.'
+            'resend_verify_success' => 'Verify email has been sent to subscriber.', 
         ],
         'sms' => [
             'subscriber'   => 'Subscriber',
@@ -319,6 +319,9 @@ return [
         ],
         'extra' => [
             'extra'         => 'Extra',
+            'status_page'   => 'Status Page',
+            'mail'          => 'Mail',
+            'sms'           => 'SMS' 
         ]
     ],
 

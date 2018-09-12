@@ -15,6 +15,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @include('partials.errors')
                     <fieldset>
+                        <h4>{{ trans('dashboard.settings.extra.status_page') }}</h4>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
@@ -23,6 +24,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" value="0" name="use-status-labels">
+                                        <input type="checkbox" value="1" name="use-status-labels" {{ Config::get('setting.use-status-labels') ? 'checked' : null }}>
+                                        {{ trans('forms.settings.extra.use-status-labels') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>{{ trans('dashboard.settings.extra.mail') }}</h4>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
@@ -43,26 +56,16 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>{{ trans('forms.settings.extra.mail-thanks-from') }}</label>
-                                    <input type="text" class="form-control" name="mail-thanks-from" value="{{ Config::get('setting.mail-thanks-from') }}" placeholder="{{ trans('forms.settings.extra.mail-thanks-from') }}">
+                                    <input type="text" class="form-control" name="mail-thanks-from" value="{{ Config::get('setting.mail-thanks-from') }}" placeholder="{{ Config::get('setting.app_name') }}">
                                 </div>
                             </div>
                         </div>
+                        <h4>{{ trans('dashboard.settings.extra.sms') }}</h4>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>{{ trans('forms.settings.extra.sms-test-message') }}</label>
                                     <input type="text" class="form-control" name="sms-test-message" value="{{ Config::get('setting.sms-test-message') }}" placeholder="{{ trans('notifications.subscriber.sms.test.content') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="hidden" value="0" name="use-status-labels">
-                                        <input type="checkbox" value="1" name="use-status-labels" {{ Config::get('setting.use-status-labels') ? 'checked' : null }}>
-                                        {{ trans('forms.settings.extra.use-status-labels') }}
-                                    </label>
                                 </div>
                             </div>
                         </div>
