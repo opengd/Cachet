@@ -34,7 +34,23 @@
                         <div class="list-group">
                             @foreach($incident->updates as $update)
                             <a class="list-group-item incident-update-item" href="{{ $update->permalink }}">
+                                @if(Config::get('setting.use-status-labels'))
+                                    @if($update->status == 1)
+                                    <span class="label label-danger" style="background-color: {{ $themeReds }}"><i class="ion ion-flag"></i>
+                                    {{ trans('cachet.incidents.status')[1] }}</span>
+                                    @elseif($update->status == 2)
+                                    <span class="label label-default" style="background-color: {{ $themeYellows }}"><i class="ion ion-alert-circled"></i>
+                                    {{ trans('cachet.incidents.status')[2] }}</span>
+                                    @elseif($update->status == 3)
+                                    <span class="label label-info" style="background-color: {{ $themeBlues }}"><i class="ion ion-eye"></i>
+                                    {{ trans('cachet.incidents.status')[3] }}</span>
+                                    @elseif($incident->status == 4)
+                                    <span class="label label-primary" style="background-color: {{ $themeGreens }}"><i class="ion ion-checkmark"></i>
+                                    {{ trans('cachet.incidents.status')[4] }}</span>
+                                    @endif
+                                @else
                                 <i class="{{ $update->icon }}" title="{{ $update->human_status }}" data-toggle="tooltip"></i>
+                                @endif
                                 {!! $update->formatted_message !!}
                                 <small>
                                     <abbr class="timeago links" data-toggle="tooltip"

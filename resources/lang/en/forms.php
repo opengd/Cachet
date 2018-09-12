@@ -211,7 +211,8 @@ return [
             'mail-header-image'       => 'Mail header image URL',
             'mail-thanks-image'       => 'Mail thanks image URL',
             'mail-thanks-from'        => 'Mail thanks from',
-            'sms-test-message'        => 'SMS test message content (if empty default message will be used)'
+            'sms-test-message'        => 'SMS test message content (if empty default message will be used)',
+            'use-status-labels'       => 'Use status labels instead of symbols on Status Page'
         ],
         'dashboard' => [
             'notifications'           => 'Disable all notifications, if this is set you will not be able to notify subscribers.'

@@ -505,6 +505,16 @@ class SettingsController extends Controller
             }
         }
 
+        if (Binput::get('use-status-labels') === '1') {
+            if ($use_status_labels = Binput::get('use-status-labels', null, false, false)) {
+                $setting->set('use-status-labels', $use_status_labels);
+            } else {
+                $setting->delete('use-status-labels');
+            }
+        } else {
+            $setting->delete('use-status-labels');
+        }
+
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

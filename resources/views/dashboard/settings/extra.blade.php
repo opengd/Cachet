@@ -55,6 +55,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" value="0" name="use-status-labels">
+                                        <input type="checkbox" value="1" name="use-status-labels" {{ Config::get('setting.use-status-labels') ? 'checked' : null }}>
+                                        {{ trans('forms.settings.extra.use-status-labels') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
 
                     <div class="row">
