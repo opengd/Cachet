@@ -134,6 +134,7 @@ function onTemplateChange(value) {
         }
     }).then(response => {
         $("[name='message']").val(response.data.template);
+        $("[name='status'][value='" + response.data.status + "']").prop("checked",true);
     }).catch(response => {
         (new Cachet.Notifier()).notify('There was an error finding that template.');
     })

@@ -42,6 +42,33 @@ window.addEventListener("DOMContentLoaded", function(e) {
                         <input type="text" class="form-control" name="name" id="template-name" required placeholder="{{ trans('forms.incidents.templates.name') }}" value="{{ Binput::old('name') }}">
                     </div>
                     <div class="form-group">
+                        <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="0" checked required>                            
+                            {{ trans('cachet.incidents.status')[0] }}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="1" required>
+                            <i class="icon ion-flag"></i>
+                            {{ trans('cachet.incidents.status')[1] }}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="2" required>
+                            <i class="icon ion-alert-circled"></i>
+                            {{ trans('cachet.incidents.status')[2] }}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="3" required>
+                            <i class="icon ion-eye"></i>
+                            {{ trans('cachet.incidents.status')[3] }}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="4" required>
+                            <i class="icon ion-checkmark"></i>
+                            {{ trans('cachet.incidents.status')[4] }}
+                        </label>
+                    </div>
+                    <div class="form-group">
                         <label>{{ trans('forms.incidents.templates.template') }}</label>
                         <textarea name="template" id="cm-editor" class="form-control" rows="8" placeholder="{{ trans('forms.incidents.templates.template') }}">{{ Binput::old('template') }}</textarea>
                         <span class="help-block">{!! trans('forms.incidents.templates.update.twig') !!}</span>

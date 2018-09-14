@@ -252,6 +252,7 @@ class IncidentTemplateController extends Controller
             IncidentUpdateTemplate::create([
                 'name'     => Binput::get('name'),
                 'template' => Binput::get('template', null, false, false),
+                'status'   => Binput::get('status')
             ]);
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.templates.update.create')
@@ -276,6 +277,7 @@ class IncidentTemplateController extends Controller
         try {
             $template = IncidentUpdateTemplate::find($template_id);
             $template->update(Binput::get('template'));
+            $template->update(['status' => Binput::get('status')]);
         } catch (ValidationException $e) {
             return cachet_redirect('dashboard.templates.update.edit', ['id' => $template->id])
                 ->withUpdatedTemplate($template)

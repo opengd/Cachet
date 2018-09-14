@@ -36,6 +36,7 @@ return [
         'posted'       => 'Posted :timestamp',
         'posted_at'    => 'Posted at :timestamp',
         'status'       => [
+            0 => 'None',
             1 => 'Investigating',
             2 => 'Identified',
             3 => 'Watching',

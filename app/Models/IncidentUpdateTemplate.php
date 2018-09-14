@@ -28,6 +28,7 @@ class IncidentUpdateTemplate extends Model
         'name'     => 'string',
         'slug'     => 'string',
         'template' => 'string',
+        'status'   => 'integer',
     ];
 
     /**
@@ -35,7 +36,7 @@ class IncidentUpdateTemplate extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['name', 'slug', 'template'];
+    protected $fillable = ['name', 'slug', 'template', 'status'];
 
     /**
      * The validation rules.
@@ -45,6 +46,7 @@ class IncidentUpdateTemplate extends Model
     public $rules = [
         'name'     => 'required|string',
         'template' => 'required|string',
+        'status'   => 'required|integer'
     ];
 
     /**
