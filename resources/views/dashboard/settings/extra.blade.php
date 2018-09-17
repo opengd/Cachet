@@ -35,6 +35,19 @@
                                 </div>
                             </div>
                         </div>
+                        <h4>{{ trans('dashboard.settings.extra.incident') }}</h4>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" value="0" name="require-ticket-id">
+                                        <input type="checkbox" value="1" name="require-ticket-id" {{ Config::get('setting.require-ticket-id') ? 'checked' : null }}>
+                                        {{ trans('forms.settings.extra.require-ticket-id') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         <h4>{{ trans('dashboard.settings.extra.mail') }}</h4>
                         <div class="row">
                             <div class="col-xs-12">

@@ -321,7 +321,8 @@ return [
             'extra'         => 'Extra',
             'status_page'   => 'Status Page',
             'mail'          => 'Mail',
-            'sms'           => 'SMS' 
+            'sms'           => 'SMS',
+            'incident'      => 'Create Incident'
         ]
     ],
 

@@ -212,7 +212,8 @@ return [
             'mail-thanks-image'       => 'Mail signature image URL',
             'mail-thanks-from'        => 'Mail signature from',
             'sms-test-message'        => 'SMS test message content (if empty default message will be used)',
-            'use-status-labels'       => 'Use status labels instead of symbols on Status Page'
+            'use-status-labels'       => 'Use status labels instead of symbols on Status Page',
+            'require-ticket-id'       => 'Require Ticket ID'
         ],
         'dashboard' => [
             'notifications'           => 'Disable all notifications, if this is set you will not be able to notify subscribers.'

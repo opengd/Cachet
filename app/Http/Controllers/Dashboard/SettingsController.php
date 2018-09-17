@@ -515,6 +515,16 @@ class SettingsController extends Controller
             $setting->delete('use-status-labels');
         }
 
+        if (Binput::get('require-ticket-id') === '1') {
+            if ($require_ticket_id = Binput::get('require-ticket-id', null, false, false)) {
+                $setting->set('require-ticket-id', $require_ticket_id);
+            } else {
+                $setting->delete('require-ticket-id');
+            }
+        } else {
+            $setting->delete('require-ticket-id');
+        }
+
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));
     }
 }

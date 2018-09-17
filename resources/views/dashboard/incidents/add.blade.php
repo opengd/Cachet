@@ -120,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="incident-ticket">{{ trans('forms.incidents.ticket') }}</label>
-                            <input type="text" class="form-control" name="ticket" id="incident-ticket" value="{{ Binput::old('ticket') }}" placeholder="{{ trans('forms.incidents.ticket') }}">
+                            <input type="text" class="form-control" name="ticket" id="incident-ticket" value="{{ Binput::old('ticket') }}" placeholder="{{ trans('forms.incidents.ticket') }}" {{ Config::get('setting.require-ticket-id') ? 'required' : null }}>
                         </div>
                         <div class="form-group">
                             <label>{{ trans('forms.incidents.occurred_at') }}</label> <small class="text-muted">{{ trans('forms.optional') }}</small>
