@@ -22,26 +22,26 @@
             <form class="form-vertical" name="IncidentUpdateForm" role="form" method="POST" autocomplete="off">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <fieldset>
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 1em;">
                         <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="1" required {{ ($update->status == 1) ? "checked='checked'" : "" }}>
-                            <h4><span class="label label-danger"><i class="ion ion-flag"></i>
+                            <h4 style="margin-top: 0px;"><span class="label label-danger"><i class="ion ion-flag"></i>
                             {{ trans('cachet.incidents.status')[1] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="2" required {{ ($update->status == 2) ? "checked='checked'" : "" }}>
-                            <h4><span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
+                            <h4 style="margin-top: 0px;"><span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
                             {{ trans('cachet.incidents.status')[2] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="3" required{{ ($update->status == 3) ? "checked='checked'" : "" }}>
-                            <h4><span class="label label-info"><i class="ion ion-eye"></i>
+                            <h4 style="margin-top: 0px;"><span class="label label-info"><i class="ion ion-eye"></i>
                             {{ trans('cachet.incidents.status')[3] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="4" required {{ ($update->status == 4) ? "checked='checked'" : "" }}>
-                            <h4><span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
+                            <h4 style="margin-top: 0px;"><span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
                             {{ trans('cachet.incidents.status')[4] }}</span></h4>
                         </label>
                     </div>

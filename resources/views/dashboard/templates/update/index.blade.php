@@ -24,6 +24,24 @@
                     <div class="row striped-list-item">
                         <div class="col-xs-6">
                             <strong>{{ $template->name }}</strong>
+                            <p>
+                            @if($template->status == 0)
+                            <span class="label label-default">
+                            {{ trans('cachet.incidents.status')[0] }}</span>
+                            @elseif($template->status == 1)
+                            <span class="label label-danger"><i class="ion ion-flag"></i>
+                            {{ trans('cachet.incidents.status')[1] }}</span>
+                            @elseif($template->status == 2)
+                            <span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
+                            {{ trans('cachet.incidents.status')[2] }}</span>
+                            @elseif($template->status == 3)
+                            <span class="label label-info"><i class="ion ion-eye"></i>
+                            {{ trans('cachet.incidents.status')[3] }}</span>
+                            @elseif($template->status == 4)
+                            <span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
+                            {{ trans('cachet.incidents.status')[4] }}</span>
+                            @endif
+                            </p>
                         </div>
                         <div class="col-xs-6 text-right">
                             <a href="{{ cachet_route('dashboard.templates.update.edit', [$template->id]) }}" class="btn btn-default">{{ trans('forms.edit') }}</a>

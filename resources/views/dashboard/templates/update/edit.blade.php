@@ -53,28 +53,29 @@ window.addEventListener("DOMContentLoaded", function(e) {
                         <div class="form-group">
                         <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                         <label class="radio-inline">
-                            <input type="radio" name="status" value="0" required {{ $template->status === 0 ? 'checked' : null }}>                            
-                            {{ trans('cachet.incidents.status')[0] }}
+                            <input type="radio" name="status" value="1" required {{ $template->status === 0 ? 'checked' : null }}>
+                            <h4 style="margin-top: 0px;"><span class="label label-default">
+                            {{ trans('cachet.incidents.status')[0] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="1" required {{ $template->status === 1 ? 'checked' : null }}>
-                            <i class="icon ion-flag"></i>
-                            {{ trans('cachet.incidents.status')[1] }}
+                            <h4 style="margin-top: 0px;"><span class="label label-danger"><i class="ion ion-flag"></i>
+                            {{ trans('cachet.incidents.status')[1] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="2" required {{ $template->status === 2 ? 'checked' : null }}>
-                            <i class="icon ion-alert-circled"></i>
-                            {{ trans('cachet.incidents.status')[2] }}
+                            <h4 style="margin-top: 0px;"><span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
+                            {{ trans('cachet.incidents.status')[2] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="3" required {{ $template->status === 3 ? 'checked' : null }}>
-                            <i class="icon ion-eye"></i>
-                            {{ trans('cachet.incidents.status')[3] }}
+                            <h4 style="margin-top: 0px;"><span class="label label-info"><i class="ion ion-eye"></i>
+                            {{ trans('cachet.incidents.status')[3] }}</span></h4>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="4" required {{ $template->status === 4 ? 'checked' : null }}>
-                            <i class="icon ion-checkmark"></i>
-                            {{ trans('cachet.incidents.status')[4] }}
+                            <h4 style="margin-top: 0px;"><span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
+                            {{ trans('cachet.incidents.status')[4] }}</span></h4>
                         </label>
                         </div>
                         <div class="form-group">

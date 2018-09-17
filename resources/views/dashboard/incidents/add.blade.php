@@ -10,6 +10,7 @@
     </span>
     &gt; <small>{{ trans('dashboard.incidents.add.title') }}</small>
 </div>
+
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -38,26 +39,27 @@
                             <label for="incident-name">{{ trans('forms.incidents.name') }}</label>
                             <input type="text" class="form-control" name="name" id="incident-name" required value="{{ Binput::old('name') }}" placeholder="{{ trans('forms.incidents.name') }}" v-model="name">
                         </div>
+
                         <div class="form-group">
                             <label for="incident-name">{{ trans('forms.incidents.status') }}</label><br>
                             <label class="radio-inline">
                                 <input type="radio" name="status" value="1" checked>
-                                <h4><span class="label label-danger"><i class="ion ion-flag"></i>
+                                <h4 style="margin-top: 0px;"><span class="label label-danger"><i class="ion ion-flag"></i>
                                 {{ trans('cachet.incidents.status')[1] }}</span></h4>
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="status" value="2" v-model="status">
-                                <h4><span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
+                                <h4 style="margin-top: 0px;"><span class="label label-default" style="background-color: #f0ad4e;"><i class="ion ion-alert-circled"></i>
                                 {{ trans('cachet.incidents.status')[2] }}</span></h4>
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="status" value="3" v-model="status">
-                                <h4><span class="label label-info"><i class="ion ion-eye"></i>
+                                <h4 style="margin-top: 0px;"><span class="label label-info"><i class="ion ion-eye"></i>
                                 {{ trans('cachet.incidents.status')[3] }}</span></h4>
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="status" value="4" v-model="status">
-                                <h4><span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
+                                <h4 style="margin-top: 0px;"><span class="label label-primary" style="background-color: #5cb85c;"><i class="ion ion-checkmark"></i>
                                 {{ trans('cachet.incidents.status')[4] }}</span></h4>
                             </label>
                         </div>
